@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.gadgetroma.com/sitemap.xml
