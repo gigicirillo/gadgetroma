@@ -1,118 +1,157 @@
 const heroSequence = document.querySelector('.hero-sequence');
 const sequenceVideo = heroSequence.querySelector('.sequence-video');
-const { source: sequenceSource, products: productList } = sequenceVideo.dataset;
+const { source: sequenceSource } = sequenceVideo.dataset;
 
 if (sequenceSource) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const heroStage = heroSequence.querySelector('.hero');
   const sequenceArt = heroSequence.querySelector('.sequence-art');
-  const caption = heroSequence.querySelector('.sequence-caption');
-  const sceneName = caption.querySelector('.sequence-name');
-  const sceneCount = caption.querySelector('.sequence-count');
   const header = document.querySelector('header.top');
-  const products = productList.split('|');
-  heroSequence.style.setProperty('--chapter-count', products.length);
-  const framesPerSecond = 24;
-  const framesPerProduct = 120;
-  const totalFrames = products.length * framesPerProduct;
-  let updateFrame = 0;
-  let displayedFrame = 0;
-  let requestedFrame = -1;
+  const clipDuration = 5;
+  const clipCount = 5;
+  const lastFrameOffset = 1 / 24;
+  let nextClip = 0;
+  let clipEnd = 0;
+  let frame = 0;
   let timeout;
-  let active = false;
+  let ready = false;
+  let playing = false;
+  let lastWheel = -Infinity;
+  let touchStart;
+  let touchConsumed = false;
 
   function sizeStage() {
     const headerHeight = header.getBoundingClientRect().height;
-    heroSequence.style.setProperty('--hero-header', `${headerHeight}px`);
     heroSequence.style.setProperty('--hero-height', `${Math.max(1, window.innerHeight - headerHeight)}px`);
-  }
-
-  function updateSequence() {
-    updateFrame = 0;
-    if (!active || sequenceVideo.seeking) return;
-    const bounds = heroSequence.getBoundingClientRect();
-    const distance = heroSequence.offsetHeight - heroStage.offsetHeight;
-    const hold = parseFloat(getComputedStyle(heroStage).scrollMarginBottom);
-    const traveled = header.getBoundingClientRect().bottom - bounds.top;
-    const progress = Math.min(1, Math.max(0, traveled / Math.max(1, distance - hold)));
-    const targetFrame = progress * (totalFrames - 1);
-    const remaining = targetFrame - displayedFrame;
-    // Blend small wheel and touch steps. Large jumps should catch up in a single seek.
-    displayedFrame = Math.abs(remaining) < 2 || Math.abs(remaining) > framesPerProduct
-      ? targetFrame : displayedFrame + remaining * 0.62;
-    const nextFrame = Math.round(displayedFrame);
-    if (nextFrame === requestedFrame) {
-      if (nextFrame !== Math.round(targetFrame)) scheduleUpdate();
-      return;
-    }
-    requestedFrame = nextFrame;
-    sequenceVideo.currentTime = (nextFrame + 0.1) / framesPerSecond;
-  }
-
-  function scheduleUpdate() {
-    if (!updateFrame) updateFrame = requestAnimationFrame(updateSequence);
-  }
-
-  function showFrame() {
-    const chapter = Math.floor(Math.max(0, requestedFrame) / framesPerProduct);
-    sceneName.textContent = products[chapter];
-    sceneCount.textContent = `${chapter + 1} / ${products.length}`;
-    caption.style.setProperty('--sequence-progress', requestedFrame / (totalFrames - 1));
-    sequenceArt.classList.add('has-frame');
-    scheduleUpdate();
   }
 
   function showStaticHero() {
     clearTimeout(timeout);
-    active = false;
-    heroSequence.classList.remove('is-scrubbing');
+    cancelAnimationFrame(frame);
+    ready = false;
+    playing = false;
+    nextClip = 0;
+    sequenceVideo.pause();
     sequenceArt.classList.remove('has-frame');
-    caption.hidden = true;
+    heroSequence.classList.remove('clip-navigation');
     sequenceVideo.hidden = true;
-    requestedFrame = -1;
     if (sequenceVideo.hasAttribute('src')) {
       sequenceVideo.removeAttribute('src');
       sequenceVideo.load();
     }
   }
 
-  function loadSource(source) {
-    clearTimeout(timeout);
-    active = false;
-    requestedFrame = -1;
-    displayedFrame = 0;
-    sequenceVideo.preload = 'auto';
-    sequenceVideo.hidden = false;
-    sequenceVideo.src = source;
-    timeout = setTimeout(showStaticHero, 9000);
-  }
-
   function loadSequence() {
     if (reduced.matches || navigator.connection?.saveData) {
       showStaticHero();
-    } else {
-      loadSource(sequenceSource);
+      return;
     }
+    sequenceVideo.preload = 'auto';
+    sequenceVideo.hidden = false;
+    sequenceVideo.src = sequenceSource;
+    timeout = setTimeout(showStaticHero, 9000);
   }
+
+  function stopAtClipEnd() {
+    if (!playing || sequenceVideo.currentTime < clipEnd - lastFrameOffset) return;
+    sequenceVideo.pause();
+    if (sequenceVideo.currentTime >= clipEnd) sequenceVideo.currentTime = clipEnd - lastFrameOffset * 0.5;
+    playing = false;
+    nextClip += 1;
+    if (nextClip === clipCount) heroSequence.classList.remove('clip-navigation');
+    cancelAnimationFrame(frame);
+  }
+
+  function watchPlayback() {
+    stopAtClipEnd();
+    if (playing) frame = requestAnimationFrame(watchPlayback);
+  }
+
+  function playNextClip() {
+    if (playing) return;
+    const clip = nextClip;
+    clipEnd = (clip + 1) * clipDuration;
+    playing = true;
+    sequenceVideo.currentTime = clip * clipDuration;
+    sequenceVideo.play().catch(() => {
+      if (playing && nextClip === clip) showStaticHero();
+    });
+    frame = requestAnimationFrame(watchPlayback);
+  }
+
+  function canAdvance() {
+    if (!ready || nextClip >= clipCount) return false;
+    const { top, bottom } = heroSequence.getBoundingClientRect();
+    const headerBottom = header.getBoundingClientRect().bottom;
+    return top <= headerBottom + 1 && bottom > headerBottom + 1;
+  }
+
+  window.addEventListener('wheel', (event) => {
+    if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+    const newGesture = event.timeStamp - lastWheel > 160;
+    lastWheel = event.timeStamp;
+    if (event.deltaY <= 0 || !event.cancelable) return;
+    if (!canAdvance()) {
+      // Keep the tail of the final gesture from pulling the hero off screen.
+      if (ready && nextClip === clipCount && !newGesture && heroSequence.getBoundingClientRect().bottom > innerHeight - 2) {
+        event.preventDefault();
+      }
+      return;
+    }
+    event.preventDefault();
+    if (newGesture) playNextClip();
+  }, { passive: false });
+
+  window.addEventListener('touchstart', (event) => {
+    touchStart = event.touches.length === 1 && canAdvance() ? event.touches[0] : undefined;
+    touchConsumed = false;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (event) => {
+    if (!touchStart || event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    const delta = touchStart.clientY - touch.clientY;
+    if (touchConsumed || (delta > 16 && delta > Math.abs(touch.clientX - touchStart.clientX))) {
+      if (!event.cancelable) return;
+      event.preventDefault();
+      touchConsumed = true;
+    }
+  }, { passive: false });
+
+  window.addEventListener('touchend', () => {
+    if (touchConsumed && canAdvance()) playNextClip();
+    touchStart = undefined;
+    touchConsumed = false;
+  }, { passive: true });
+
+  window.addEventListener('touchcancel', () => {
+    touchStart = undefined;
+    touchConsumed = false;
+  }, { passive: true });
+
+  window.addEventListener('keydown', (event) => {
+    if (!['ArrowDown', 'PageDown', ' '].includes(event.key) || event.shiftKey || event.ctrlKey ||
+        event.metaKey || event.altKey || event.target.closest?.('a, button, input, textarea, select, [contenteditable]')) return;
+    if (!canAdvance()) return;
+    event.preventDefault();
+    if (!event.repeat) playNextClip();
+  });
 
   sequenceVideo.addEventListener('loadeddata', () => {
     if (!sequenceVideo.hasAttribute('src') || reduced.matches) return;
-    if (Math.abs(sequenceVideo.duration - totalFrames / framesPerSecond) > 0.3) {
+    if (Math.abs(sequenceVideo.duration - clipCount * clipDuration) > 0.3) {
       showStaticHero();
       return;
     }
     clearTimeout(timeout);
-    active = true;
-    sizeStage();
-    heroSequence.classList.add('is-scrubbing');
-    caption.hidden = false;
-    scheduleUpdate();
+    ready = true;
+    sequenceArt.classList.add('has-frame');
+    heroSequence.classList.add('clip-navigation');
   });
-  sequenceVideo.addEventListener('seeked', () => { if (active) showFrame(); });
+  sequenceVideo.addEventListener('timeupdate', stopAtClipEnd);
+  sequenceVideo.addEventListener('ended', stopAtClipEnd);
   sequenceVideo.addEventListener('error', showStaticHero);
   reduced.addEventListener('change', loadSequence);
-  window.addEventListener('scroll', scheduleUpdate, { passive: true });
-  window.addEventListener('resize', () => { sizeStage(); scheduleUpdate(); });
+  window.addEventListener('resize', sizeStage);
   sizeStage();
   loadSequence();
 }

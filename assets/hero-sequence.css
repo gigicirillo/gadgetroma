@@ -1,11 +1,5 @@
-.hero-sequence {
-  --hero-header: 5rem;
-  --chapter-scroll: max(375px, 68svh);
-  --final-hold: max(140px, 30svh);
-}
-.hero-sequence.is-scrubbing {
-  min-height: calc(var(--hero-height) + var(--chapter-count) * var(--chapter-scroll) + var(--final-hold));
-}
+.hero-sequence { --hero-header: 5rem; }
+.hero-sequence.clip-navigation { touch-action: pan-x pinch-zoom; }
 .home-experience .hero-sequence .hero {
   position: relative;
   isolation: isolate;
@@ -16,11 +10,6 @@
   padding: clamp(1.5rem, 4svh, 3rem) var(--page-gutter) 4.5rem;
   color: #f4fff0;
   background: #10352d;
-}
-.home-experience .hero-sequence.is-scrubbing .hero {
-  position: sticky;
-  top: var(--hero-header);
-  scroll-margin-bottom: var(--final-hold);
 }
 .hero-sequence .hero-copy {
   position: relative;
@@ -63,37 +52,6 @@
 .sequence-art video { visibility: hidden; }
 .sequence-art.has-frame video { visibility: visible; }
 .sequence-art [hidden] { display: none; }
-.hero-art .sequence-caption:not([hidden]) {
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  inset: auto var(--page-gutter) 1rem auto;
-  width: min(24rem, calc(100% - 2 * var(--page-gutter)));
-  max-width: none;
-  gap: .4rem .8rem;
-  padding: .65rem .85rem;
-  background: #10352de8;
-  color: #f4fff0;
-  font-size: .78rem;
-  font-weight: 750;
-  pointer-events: none;
-}
-.sequence-count { font-variant-numeric: tabular-nums; }
-.sequence-progress {
-  grid-column: 1 / -1;
-  height: 3px;
-  border-radius: 3px;
-  background: #ffffff4f;
-}
-.sequence-progress::before {
-  content: "";
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: #c9f17a;
-  transform: scaleX(var(--sequence-progress, 0));
-  transform-origin: left center;
-}
 @media (max-width: 680px) {
   .hero-sequence .hero { align-content: end; }
   .hero-sequence .hero-copy { max-width: 34rem; margin-left: 0; }
@@ -112,7 +70,6 @@
   .hero-sequence h1 .desktop { display: none; }
   .hero-sequence .hero-copy .eyebrow { margin-bottom: .5rem; }
   .hero-sequence .lead { font-size: .9rem; }
-  .hero-art .sequence-caption:not([hidden]) { width: min(24rem, 39%); }
   .hero-sequence h1 { font-size: clamp(1.8rem, 6.5svh, 3.4rem); }
   .hero-sequence .lead { margin-top: .5rem; }
   .hero-sequence .actions { margin-top: .65rem; }
