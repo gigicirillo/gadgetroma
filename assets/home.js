@@ -116,38 +116,3 @@ if (processStory) {
   window.addEventListener('resize', scheduleProcess);
   scheduleProcess();
 }
-
-const heroVideo = document.querySelector('.hero-art video');
-if (heroVideo) {
-  const endTitle = document.querySelector('.hero-end-title');
-  function updateEndTitle() {
-    endTitle.classList.toggle('is-visible',
-      Number.isFinite(heroVideo.duration) && heroVideo.currentTime >= heroVideo.duration * 0.77);
-  }
-
-  function showFallback() {
-    heroVideo.hidden = true;
-    document.querySelector('.hero-fallback').hidden = false;
-    endTitle.classList.remove('is-visible');
-  }
-
-  heroVideo.addEventListener('error', showFallback);
-  if (heroVideo.error) showFallback();
-  heroVideo.addEventListener('timeupdate', updateEndTitle);
-  heroVideo.addEventListener('seeked', updateEndTitle);
-
-  if ('IntersectionObserver' in window) {
-    const videoVisibility = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting || entry.intersectionRatio < 0.45) {
-        heroVideo.pause();
-        return;
-      }
-      if (motionPreference.matches || navigator.connection?.saveData || heroVideo.currentTime > 0 || heroVideo.ended) return;
-      heroVideo.play().catch(() => {});
-    }, { threshold: 0.45 });
-    videoVisibility.observe(heroVideo);
-  }
-  motionPreference.addEventListener('change', () => {
-    if (motionPreference.matches) heroVideo.pause();
-  });
-}

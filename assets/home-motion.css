@@ -138,36 +138,3 @@
   .value-card.in-view ul li:nth-child(2) { animation-delay: 240ms; }
   .value-card.in-view ul li:nth-child(3) { animation-delay: 300ms; }
 }
-
-.hero-art.has-video { background: #17372e; }
-.hero-art.has-video :is(video, img) {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-.hero-art.has-video [hidden] { display: none; }
-.hero-art .hero-end-title {
-  position: absolute;
-  inset: auto 0 0;
-  width: 100%;
-  max-width: none;
-  border-radius: 0;
-  display: grid;
-  align-content: end;
-  min-height: 48%;
-  padding: 1.1rem clamp(1rem, 3vw, 2rem) 3.6rem;
-  background: linear-gradient(transparent, #102923ef 70%);
-  color: #f8fff0;
-  font: 700 clamp(1.2rem, 2.6vw, 2.2rem)/1.06 Georgia, serif;
-  text-wrap: balance;
-  pointer-events: none;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 3;
-}
-.hero-end-title.is-visible { visibility: visible; opacity: 1; }
-@media (prefers-reduced-motion: no-preference) {
-  .hero-end-title { transition: opacity 280ms ease; }
-}

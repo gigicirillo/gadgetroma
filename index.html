@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="./assets/home-motion.css">
   <link rel="stylesheet" href="./assets/home-experience.css">
   <script src="./assets/home.js" defer></script>
+  <link rel="stylesheet" href="./assets/hero-sequence.css">
+  <script src="./assets/hero-sequence.js" defer></script>
 </head>
 <body class="home-experience">
   <a class="skip" href="#contenuto">Salta al contenuto</a>
@@ -25,24 +27,29 @@
     </div>
   </header>
   <main id="contenuto">
-    <section class="wrap hero" aria-labelledby="titolo">
-      <div class="hero-copy">
-        <p class="eyebrow">Gadget personalizzati · Roma</p>
-        <h1 id="titolo">Il tuo brand,<br> <em>da portare<br class="desktop"> con sé.</em></h1>
-        <p class="lead">Gadget, abbigliamento e kit personalizzati per aziende, eventi ed enti. Ti aiutiamo a scegliere cosa realizzare in base a chi lo riceverà, al budget e alla data di consegna.</p>
-        <div class="actions">
-          <a class="button" href="#preventivo">Richiedi un preventivo <span aria-hidden="true">→</span></a>
-          <a class="text-link" href="#prodotti">Esplora i prodotti <span aria-hidden="true">↓</span></a>
+    <section class="hero-sequence" aria-labelledby="titolo">
+      <div class="wrap hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Gadget personalizzati · Roma</p>
+          <h1 id="titolo">Il tuo brand,<br> <em>da portare<br class="desktop"> con sé.</em></h1>
+          <p class="lead">Gadget, abbigliamento e kit personalizzati per aziende, eventi ed enti. Ti aiutiamo a scegliere cosa realizzare in base a chi lo riceverà, al budget e alla data di consegna.</p>
+          <div class="actions">
+            <a class="button" href="#preventivo">Richiedi un preventivo <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="#prodotti">Esplora i prodotti <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
+        <figure class="hero-art sequence-art">
+          <img class="sequence-poster" src="./assets/hero-gadget-poster.webp" width="960" height="720" fetchpriority="high"
+            alt="Borraccia GadgetRoma con logo stampato">
+          <video class="sequence-video" data-source="https://d2ol7oe51mr4n9.cloudfront.net/user_3JkJWu4aQXEyV7ifLgrw5jqrsr5/771dee66-2fd0-4565-aca6-4620253b9efb.mp4"
+            width="960" height="720" preload="none" muted playsinline hidden
+            aria-label="Sequenza di dieci gadget GadgetRoma utilizzati nella vita di tutti i giorni"></video>
+          <figcaption class="sequence-caption" hidden>
+            <span class="sequence-name"></span><span class="sequence-count"></span>
+            <span class="sequence-progress" aria-hidden="true"></span>
+          </figcaption>
+        </figure>
       </div>
-      <figure class="hero-art has-video">
-        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_3JkJWu4aQXEyV7ifLgrw5jqrsr5/hf_20261118_215005_bb01704c-2d5a-4cd4-a3ab-351535e65627.mp4"
-          poster="./assets/kit-editoriale.webp" width="1120" height="840" preload="metadata" muted playsinline controls
-          aria-label="Dimostrazione di personalizzazione di tazza, penna e agenda"></video>
-        <img class="hero-fallback" src="./assets/kit-editoriale.webp" width="1120" height="840"
-          alt="Composizione di esempio con borraccia, shopper, tazza e notebook" hidden>
-        <figcaption class="hero-end-title">Il tuo brand parla di te ovunque.</figcaption>
-      </figure>
     </section>
 
     <ul class="wrap facts glass" aria-label="Il servizio GadgetRoma">

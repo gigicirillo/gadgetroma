@@ -1,0 +1,74 @@
+.hero-sequence {
+  --hero-header: 5rem;
+  --chapter-scroll: max(245px, 44svh);
+  --final-hold: max(140px, 28svh);
+}
+.hero-sequence.is-scrubbing {
+  min-height: calc(var(--hero-height) + 10 * var(--chapter-scroll) + var(--final-hold));
+}
+.hero-sequence.is-scrubbing .hero {
+  position: sticky;
+  top: var(--hero-header);
+  min-height: var(--hero-height);
+  padding-block: clamp(.8rem, 2.5svh, 2rem);
+}
+.sequence-art {
+  display: grid;
+  background: #e4e6d9;
+}
+.sequence-art > :is(video, img) {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.sequence-art video { visibility: hidden; }
+.sequence-art.has-frame video { visibility: visible; }
+.sequence-art [hidden] { display: none; }
+.hero-art .sequence-caption:not([hidden]) {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: auto;
+  max-width: none;
+  gap: .4rem .8rem;
+  padding: .65rem .85rem;
+  background: #10352de8;
+  color: #f4fff0;
+  font-size: .78rem;
+  font-weight: 750;
+  pointer-events: none;
+}
+.sequence-count { font-variant-numeric: tabular-nums; }
+.sequence-progress {
+  grid-column: 1 / -1;
+  height: 3px;
+  border-radius: 3px;
+  background: #ffffff4f;
+}
+.sequence-progress::before {
+  content: "";
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #c9f17a;
+  transform: scaleX(var(--sequence-progress, 0));
+  transform-origin: left center;
+}
+@media (max-width: 680px) {
+  .hero-sequence.is-scrubbing .hero { gap: .8rem; align-content: center; }
+  .hero-sequence.is-scrubbing h1 { font-size: clamp(2rem, 8.1vw, 3.25rem); }
+  .hero-sequence.is-scrubbing .hero-copy .eyebrow { margin-bottom: .5rem; }
+  .hero-sequence.is-scrubbing .lead { margin-top: .65rem; font-size: .9rem; }
+  .hero-sequence.is-scrubbing .actions { margin-top: .75rem; gap: .55rem .8rem; }
+  .hero-sequence.is-scrubbing .button { min-height: 2.7rem; }
+  .sequence-art > :is(video, img) { aspect-ratio: 4 / 3; max-height: 37svh; }
+  .hero-art .sequence-caption:not([hidden]) { inset: auto .45rem .45rem; }
+}
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero-sequence.is-scrubbing .hero { grid-template-columns: 1fr 1fr; }
+  .hero-sequence.is-scrubbing h1 { font-size: clamp(1.8rem, 6.5svh, 3.4rem); }
+  .hero-sequence.is-scrubbing .lead { margin-top: .5rem; }
+  .hero-sequence.is-scrubbing .actions { margin-top: .65rem; }
+  .hero-sequence.is-scrubbing .sequence-art > :is(video, img) { max-height: 64svh; }
+}
