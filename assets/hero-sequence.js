@@ -1,6 +1,6 @@
 const heroSequence = document.querySelector('.hero-sequence');
 const sequenceVideo = heroSequence.querySelector('.sequence-video');
-const sequenceSource = sequenceVideo.dataset.source;
+const { source: sequenceSource, fallbackSource } = sequenceVideo.dataset;
 
 if (sequenceSource) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -74,21 +74,37 @@ if (sequenceSource) {
     }
   }
 
+  function loadSource(source) {
+    clearTimeout(timeout);
+    active = false;
+    requestedFrame = -1;
+    sequenceVideo.preload = 'auto';
+    sequenceVideo.hidden = false;
+    sequenceVideo.src = source;
+    timeout = setTimeout(tryFallback, 9000);
+  }
+
+  function tryFallback() {
+    const currentSource = sequenceVideo.getAttribute('src');
+    if (fallbackSource && currentSource === sequenceSource && !reduced.matches) {
+      loadSource(fallbackSource);
+    } else {
+      showStaticHero();
+    }
+  }
+
   function loadSequence() {
     if (reduced.matches || navigator.connection?.saveData) {
       showStaticHero();
-      return;
+    } else {
+      loadSource(sequenceSource);
     }
-    sequenceVideo.preload = 'auto';
-    sequenceVideo.hidden = false;
-    sequenceVideo.src = sequenceSource;
-    timeout = setTimeout(showStaticHero, 9000);
   }
 
   sequenceVideo.addEventListener('loadeddata', () => {
     if (!sequenceVideo.hasAttribute('src') || reduced.matches) return;
     if (Math.abs(sequenceVideo.duration - totalFrames / framesPerSecond) > 0.3) {
-      showStaticHero();
+      tryFallback();
       return;
     }
     clearTimeout(timeout);
@@ -99,7 +115,7 @@ if (sequenceSource) {
     scheduleUpdate();
   });
   sequenceVideo.addEventListener('seeked', () => { if (active) showFrame(); });
-  sequenceVideo.addEventListener('error', showStaticHero);
+  sequenceVideo.addEventListener('error', tryFallback);
   reduced.addEventListener('change', loadSequence);
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', () => { sizeStage(); scheduleUpdate(); });
