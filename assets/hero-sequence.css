@@ -88,18 +88,17 @@
   width: min(100%, var(--page-width));
   margin: 0;
   padding: .65rem clamp(.45rem, 1.5vw, 1.2rem) .2rem;
-  border: 1px solid #defff036;
-  border-radius: 1rem;
-  background: linear-gradient(110deg, #0a2a23eb, #10362ed9);
   color: #fff;
+  text-shadow: 0 1px 3px #08251f, 0 2px 10px #08251f;
 }
 .hero-trust h2 { color: #fff; margin: 0; }
 .hero-trust .trust-track { padding-block: .4rem; }
 .hero-trust .trust-track li { min-height: 3rem; }
-.hero-trust .trust-track img { height: clamp(2.15rem, 4vw, 3.35rem); filter: grayscale(1) invert(1) brightness(1.45); }
+.hero-trust .trust-track img { height: clamp(2.15rem, 4vw, 3.35rem); filter: grayscale(1) invert(1) brightness(1.45) drop-shadow(0 1px 2px #08251f); }
 .hero-trust .trust-arrow, .hero-trust .trust-motion { color: #f1fff0; }
-.hero-trust .trust-arrow:hover { background: #ffffff24; }
-.hero-trust .trust-motion { min-height: 1.4rem; }
+.hero-trust .trust-arrow { background: #123d32; }
+.hero-trust .trust-arrow:hover { background: #1d5344; }
+.hero-trust .trust-motion { min-height: 1.4rem; text-shadow: inherit; }
 .hero-trust :is(button, ul):focus-visible { outline-color: #d8f58c; outline-offset: 0; }
 @media (max-width: 680px) {
   .hero-sequence .hero-copy { align-self: end; }
