@@ -6,30 +6,68 @@
 .hero-sequence.is-scrubbing {
   min-height: calc(var(--hero-height) + 10 * var(--chapter-scroll) + var(--final-hold));
 }
-.hero-sequence.is-scrubbing .hero {
+.home-experience .hero-sequence .hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  min-height: var(--hero-height, calc(100svh - var(--hero-header)));
+  padding: clamp(1.5rem, 4svh, 3rem) var(--page-gutter) 4.5rem;
+  color: #f4fff0;
+  background: #10352d;
+}
+.home-experience .hero-sequence.is-scrubbing .hero {
   position: sticky;
   top: var(--hero-header);
-  min-height: var(--hero-height);
-  padding-block: clamp(.8rem, 2.5svh, 2rem);
 }
-.sequence-art {
-  display: grid;
-  background: #e4e6d9;
+.hero-sequence .hero-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: min(34rem, 43vw);
+  text-shadow: 0 2px 12px #061a16ab;
+  margin-left: max(0px, calc((100vw - var(--page-width)) / 2 - var(--page-gutter)));
+}
+.hero-sequence .eyebrow { color: #d8f58c; }
+.hero-sequence h1 { font-size: clamp(2.6rem, min(6vw, 10svh), 5.75rem); }
+.hero-sequence h1 em { color: #d8f58c; }
+.hero-sequence .lead { color: #f2f9ec; }
+.hero-sequence .hero-copy .button { text-shadow: none; }
+.hero-sequence .hero-copy a:focus-visible { outline-color: #d8f58c; }
+.hero-sequence .sequence-art {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #10352d;
 }
 .sequence-art > :is(video, img) {
-  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 100%;
+  max-height: none;
   object-fit: cover;
+  object-position: center;
+}
+.sequence-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, #08251ff5 0%, #08251fdd 25%, #08251f65 48%, transparent 70%);
 }
 .sequence-art video { visibility: hidden; }
 .sequence-art.has-frame video { visibility: visible; }
 .sequence-art [hidden] { display: none; }
 .hero-art .sequence-caption:not([hidden]) {
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr auto;
-  width: auto;
+  inset: auto var(--page-gutter) 1rem auto;
+  width: min(24rem, calc(100% - 2 * var(--page-gutter)));
   max-width: none;
   gap: .4rem .8rem;
   padding: .65rem .85rem;
@@ -56,19 +94,25 @@
   transform-origin: left center;
 }
 @media (max-width: 680px) {
-  .hero-sequence.is-scrubbing .hero { gap: .8rem; align-content: center; }
-  .hero-sequence.is-scrubbing h1 { font-size: clamp(2rem, 8.1vw, 3.25rem); }
-  .hero-sequence.is-scrubbing .hero-copy .eyebrow { margin-bottom: .5rem; }
-  .hero-sequence.is-scrubbing .lead { margin-top: .65rem; font-size: .9rem; }
-  .hero-sequence.is-scrubbing .actions { margin-top: .75rem; gap: .55rem .8rem; }
-  .hero-sequence.is-scrubbing .button { min-height: 2.7rem; }
-  .sequence-art > :is(video, img) { aspect-ratio: 4 / 3; max-height: 37svh; }
-  .hero-art .sequence-caption:not([hidden]) { inset: auto .45rem .45rem; }
+  .hero-sequence .hero { align-content: end; }
+  .hero-sequence .hero-copy { max-width: 34rem; margin-left: 0; }
+  .hero-sequence h1 { font-size: clamp(2rem, 8.1vw, 3.25rem); }
+  .hero-sequence .hero-copy .eyebrow { margin-bottom: .5rem; }
+  .hero-sequence .lead { margin-top: .65rem; font-size: .9rem; }
+  .hero-sequence .actions { margin-top: .75rem; gap: .55rem .8rem; }
+  .hero-sequence .button { min-height: 2.7rem; }
+  .sequence-art::after {
+    background: linear-gradient(0deg, #08251ff7 0%, #08251fe8 24%, #08251fb8 52%, #08251f50 66%, transparent 79%);
+  }
 }
 @media (max-height: 560px) and (orientation: landscape) {
-  .hero-sequence.is-scrubbing .hero { grid-template-columns: 1fr 1fr; }
-  .hero-sequence.is-scrubbing h1 { font-size: clamp(1.8rem, 6.5svh, 3.4rem); }
-  .hero-sequence.is-scrubbing .lead { margin-top: .5rem; }
-  .hero-sequence.is-scrubbing .actions { margin-top: .65rem; }
-  .hero-sequence.is-scrubbing .sequence-art > :is(video, img) { max-height: 64svh; }
+  .home-experience .hero-sequence .hero { padding-block: .85rem; }
+  .hero-sequence .hero-copy { max-width: 52%; }
+  .hero-sequence h1 .desktop { display: none; }
+  .hero-sequence .hero-copy .eyebrow { margin-bottom: .5rem; }
+  .hero-sequence .lead { font-size: .9rem; }
+  .hero-art .sequence-caption:not([hidden]) { width: min(24rem, 39%); }
+  .hero-sequence h1 { font-size: clamp(1.8rem, 6.5svh, 3.4rem); }
+  .hero-sequence .lead { margin-top: .5rem; }
+  .hero-sequence .actions { margin-top: .65rem; }
 }

@@ -57,7 +57,7 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
   }, { threshold: 0.1 });
 
   const targets = document.querySelectorAll(
-    'main section > :is(h2, p), .hero-copy > *, .hero-art, .facts > li, .trust, ' +
+    'main section > :is(h2, p), .hero-copy > *, .facts > li, .trust, ' +
     '.card, .product-card, .feature, .steps li, .process-stage, .values-intro, .value-card, .review-heading, ' +
     '.tile, .faq-band h2, .faq-band .eyebrow, .faq-list details, .faq-band .button, .quote',
   );
@@ -68,7 +68,7 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
   });
 }
 
-document.querySelectorAll('.card, .product-card, .feature, .steps li, .facts li, .tile, .faq-cubes details, .hero-art').forEach((element) => {
+document.querySelectorAll('.card, .product-card, .feature, .steps li, .facts li, .tile, .faq-cubes details').forEach((element) => {
   element.classList.add('pointer-depth');
   element.addEventListener('pointermove', (event) => {
     if (!finePointer.matches || motionPreference.matches || event.pointerType !== 'mouse') return;

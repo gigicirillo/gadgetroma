@@ -103,5 +103,6 @@ if (sequenceSource) {
   reduced.addEventListener('change', loadSequence);
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', () => { sizeStage(); scheduleUpdate(); });
+  sizeStage();
   loadSequence();
 }
