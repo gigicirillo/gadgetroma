@@ -116,3 +116,29 @@ if (processStory) {
   window.addEventListener('resize', scheduleProcess);
   scheduleProcess();
 }
+
+const reviewTrack = document.querySelector('#recensioni');
+const reviewControls = document.querySelector('.review-controls');
+if (reviewTrack && reviewControls) {
+  const [previousReview, nextReview] = reviewControls.querySelectorAll('button');
+  function updateReviewControls() {
+    const { scrollLeft, clientWidth, scrollWidth } = reviewTrack;
+    previousReview.setAttribute('aria-disabled', String(scrollLeft < 2));
+    nextReview.setAttribute('aria-disabled', String(scrollLeft + clientWidth >= scrollWidth - 2));
+  }
+  reviewControls.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-direction]');
+    if (!button || button.getAttribute('aria-disabled') === 'true') return;
+    const [first, second] = reviewTrack.children;
+    if (!second) return;
+    const step = second.offsetLeft - first.offsetLeft;
+    reviewTrack.scrollBy({
+      left: step * Number(button.dataset.direction),
+      behavior: motionPreference.matches ? 'instant' : 'smooth',
+    });
+  });
+  reviewTrack.addEventListener('scroll', updateReviewControls, { passive: true });
+  window.addEventListener('resize', updateReviewControls);
+  updateReviewControls();
+  reviewControls.hidden = false;
+}
