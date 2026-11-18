@@ -1,10 +1,10 @@
 .hero-sequence {
   --hero-header: 5rem;
-  --chapter-scroll: max(245px, 44svh);
-  --final-hold: max(140px, 28svh);
+  --chapter-scroll: max(375px, 68svh);
+  --final-hold: max(140px, 30svh);
 }
 .hero-sequence.is-scrubbing {
-  min-height: calc(var(--hero-height) + 10 * var(--chapter-scroll) + var(--final-hold));
+  min-height: calc(var(--hero-height) + var(--chapter-count) * var(--chapter-scroll) + var(--final-hold));
 }
 .home-experience .hero-sequence .hero {
   position: relative;
@@ -20,6 +20,7 @@
 .home-experience .hero-sequence.is-scrubbing .hero {
   position: sticky;
   top: var(--hero-header);
+  scroll-margin-bottom: var(--final-hold);
 }
 .hero-sequence .hero-copy {
   position: relative;

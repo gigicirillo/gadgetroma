@@ -1,6 +1,6 @@
 const heroSequence = document.querySelector('.hero-sequence');
 const sequenceVideo = heroSequence.querySelector('.sequence-video');
-const { source: sequenceSource, fallbackSource } = sequenceVideo.dataset;
+const { source: sequenceSource, products: productList } = sequenceVideo.dataset;
 
 if (sequenceSource) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -10,15 +10,13 @@ if (sequenceSource) {
   const sceneName = caption.querySelector('.sequence-name');
   const sceneCount = caption.querySelector('.sequence-count');
   const header = document.querySelector('header.top');
-  const products = [
-    'Borraccia', 'Tazza', 'Notebook', 'Penna', 'Shopper',
-    'T-shirt', 'Sacca', 'Power bank', 'Lanyard', 'Ombrello',
-  ];
+  const products = productList.split('|');
+  heroSequence.style.setProperty('--chapter-count', products.length);
   const framesPerSecond = 24;
   const framesPerProduct = 120;
   const totalFrames = products.length * framesPerProduct;
   let updateFrame = 0;
-  let desiredFrame = 0;
+  let displayedFrame = 0;
   let requestedFrame = -1;
   let timeout;
   let active = false;
@@ -29,22 +27,26 @@ if (sequenceSource) {
     heroSequence.style.setProperty('--hero-height', `${Math.max(1, window.innerHeight - headerHeight)}px`);
   }
 
-  function requestFrame() {
-    if (!active || sequenceVideo.seeking || requestedFrame === desiredFrame) return;
-    requestedFrame = desiredFrame;
-    sequenceVideo.currentTime = (requestedFrame + 0.1) / framesPerSecond;
-  }
-
   function updateSequence() {
     updateFrame = 0;
-    if (!active) return;
+    if (!active || sequenceVideo.seeking) return;
     const bounds = heroSequence.getBoundingClientRect();
     const distance = heroSequence.offsetHeight - heroStage.offsetHeight;
-    const hold = Math.max(140, window.innerHeight * 0.28);
+    const hold = parseFloat(getComputedStyle(heroStage).scrollMarginBottom);
     const traveled = header.getBoundingClientRect().bottom - bounds.top;
     const progress = Math.min(1, Math.max(0, traveled / Math.max(1, distance - hold)));
-    desiredFrame = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
-    requestFrame();
+    const targetFrame = progress * (totalFrames - 1);
+    const remaining = targetFrame - displayedFrame;
+    // Blend small wheel and touch steps. Large jumps should catch up in a single seek.
+    displayedFrame = Math.abs(remaining) < 2 || Math.abs(remaining) > framesPerProduct
+      ? targetFrame : displayedFrame + remaining * 0.62;
+    const nextFrame = Math.round(displayedFrame);
+    if (nextFrame === requestedFrame) {
+      if (nextFrame !== Math.round(targetFrame)) scheduleUpdate();
+      return;
+    }
+    requestedFrame = nextFrame;
+    sequenceVideo.currentTime = (nextFrame + 0.1) / framesPerSecond;
   }
 
   function scheduleUpdate() {
@@ -57,7 +59,7 @@ if (sequenceSource) {
     sceneCount.textContent = `${chapter + 1} / ${products.length}`;
     caption.style.setProperty('--sequence-progress', requestedFrame / (totalFrames - 1));
     sequenceArt.classList.add('has-frame');
-    requestFrame();
+    scheduleUpdate();
   }
 
   function showStaticHero() {
@@ -78,19 +80,11 @@ if (sequenceSource) {
     clearTimeout(timeout);
     active = false;
     requestedFrame = -1;
+    displayedFrame = 0;
     sequenceVideo.preload = 'auto';
     sequenceVideo.hidden = false;
     sequenceVideo.src = source;
-    timeout = setTimeout(tryFallback, 9000);
-  }
-
-  function tryFallback() {
-    const currentSource = sequenceVideo.getAttribute('src');
-    if (fallbackSource && currentSource === sequenceSource && !reduced.matches) {
-      loadSource(fallbackSource);
-    } else {
-      showStaticHero();
-    }
+    timeout = setTimeout(showStaticHero, 9000);
   }
 
   function loadSequence() {
@@ -104,7 +98,7 @@ if (sequenceSource) {
   sequenceVideo.addEventListener('loadeddata', () => {
     if (!sequenceVideo.hasAttribute('src') || reduced.matches) return;
     if (Math.abs(sequenceVideo.duration - totalFrames / framesPerSecond) > 0.3) {
-      tryFallback();
+      showStaticHero();
       return;
     }
     clearTimeout(timeout);
@@ -115,7 +109,7 @@ if (sequenceSource) {
     scheduleUpdate();
   });
   sequenceVideo.addEventListener('seeked', () => { if (active) showFrame(); });
-  sequenceVideo.addEventListener('error', tryFallback);
+  sequenceVideo.addEventListener('error', showStaticHero);
   reduced.addEventListener('change', loadSequence);
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', () => { sizeStage(); scheduleUpdate(); });
