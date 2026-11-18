@@ -301,3 +301,39 @@
   .process-story.enhanced .process-heading::before { transition: opacity 260ms ease; }
   .process-story.enhanced .process-heading .eyebrow { transition: color 260ms ease; }
 }
+
+.home-experience .service-section { padding-bottom: 0; }
+.service-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.9rem, 2vw, 2rem);
+  margin-top: clamp(1.35rem, 3.5vw, 3rem);
+}
+.service-pillar {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: clip;
+  border-radius: 1.65rem;
+}
+.service-pillar img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.52;
+  object-fit: cover;
+  object-position: center 43%;
+  background: #c5ddd0;
+}
+.service-pillar > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .7rem;
+  padding: clamp(1.05rem, 2.1vw, 2.1rem);
+}
+.service-pillar h3 { font-size: clamp(1.35rem, 2.5vw, 2.4rem); }
+.service-pillar p { color: var(--muted); }
+.service-pillar .text-link { margin-top: auto; padding-top: .4rem; }
+@media (max-width: 680px) {
+  .service-pillars { grid-template-columns: minmax(0, 1fr); }
+  .service-pillar img { aspect-ratio: 1.65; }
+}
