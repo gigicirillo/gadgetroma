@@ -8,6 +8,8 @@
   <title>Gadget personalizzati a Roma per aziende ed enti | GadgetRoma</title>
   <link rel="stylesheet" href="./assets/home.css">
   <script src="./assets/partner-slider.js" defer></script>
+  <link rel="stylesheet" href="./assets/home-motion.css">
+  <script src="./assets/home.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#contenuto">Salta al contenuto</a>
@@ -32,9 +34,13 @@
           <a class="text-link" href="#prodotti">Esplora i prodotti <span aria-hidden="true">↓</span></a>
         </div>
       </div>
-      <figure class="hero-art">
-        <img src="./assets/kit-editoriale.webp" width="1120" height="840" fetchpriority="high" alt="Composizione di esempio con borraccia, shopper, tazza e notebook">
-        <figcaption class="glass"><span class="spark" aria-hidden="true">✳</span><div><strong>Un kit coordinato</strong><br><span>Per eventi, team e nuovi ingressi</span></div></figcaption>
+      <figure class="hero-art has-video">
+        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_3JkJWu4aQXEyV7ifLgrw5jqrsr5/hf_20261118_215005_bb01704c-2d5a-4cd4-a3ab-351535e65627.mp4"
+          poster="./assets/kit-editoriale.webp" width="1120" height="840" preload="metadata" muted playsinline controls
+          aria-label="Dimostrazione di personalizzazione di tazza, penna e agenda"></video>
+        <img class="hero-fallback" src="./assets/kit-editoriale.webp" width="1120" height="840"
+          alt="Composizione di esempio con borraccia, shopper, tazza e notebook" hidden>
+        <figcaption class="hero-end-title">Il tuo brand parla di te ovunque.</figcaption>
       </figure>
     </section>
 
@@ -147,16 +153,82 @@
     </section>
 
 
-    <section class="values-band">
-      <div class="wrap section">
-        <p class="eyebrow">Come lavoriamo</p><h2>I valori che ci guidano.</h2>
-        <ul class="values"><li class="glass"><span aria-hidden="true">◷</span>Puntualità</li>
-<li class="glass"><span aria-hidden="true">◎</span>Precisione</li>
-<li class="glass"><span aria-hidden="true">◇</span>Serietà</li>
-<li class="glass"><span aria-hidden="true">↻</span>Problem solving</li>
-<li class="glass"><span aria-hidden="true">✓</span>Soddisfazione del cliente</li>
-<li class="glass"><span aria-hidden="true">♧</span>Rispetto dell’ambiente</li>
-<li class="glass"><span aria-hidden="true">♡</span>Cordialità e gentilezza</li></ul>
+    <section class="values-band" id="valori" aria-labelledby="titolo-valori">
+      <div class="wrap section values-layout">
+        <div class="values-intro">
+          <p class="eyebrow">Come lavoriamo</p>
+          <h2 id="titolo-valori">I valori che ci guidano.</h2>
+          <div class="values-controls" hidden>
+            <button type="button" aria-label="Valore precedente" aria-controls="valori-slider">←</button>
+            <span class="values-position" aria-live="polite"></span>
+            <button type="button" aria-label="Valore successivo" aria-controls="valori-slider">→</button>
+          </div>
+        </div>
+        <ul class="values-track" id="valori-slider" tabindex="0" aria-label="Valori GadgetRoma">
+          <li class="value-card glass">
+            <span class="value-symbol" aria-hidden="true">◷</span>
+            <h3>Puntualità</h3>
+            <ul>
+              <li>Partiamo dalla data in cui ti servono i gadget.</li>
+              <li>Verifichiamo i tempi in base alla lavorazione scelta.</li>
+              <li>Concordiamo la consegna prima di avviare l’ordine.</li>
+            </ul>
+          </li>
+          <li class="value-card glass">
+            <span class="value-symbol" aria-hidden="true">◎</span>
+            <h3>Precisione</h3>
+            <ul>
+              <li>Controlliamo materiali, dimensioni e tecnica di stampa.</li>
+              <li>Ti indichiamo il formato più adatto per il logo.</li>
+              <li>Approvi la bozza prima che inizi la produzione.</li>
+            </ul>
+          </li>
+          <li class="value-card glass">
+            <span class="value-symbol" aria-hidden="true">◇</span>
+            <h3>Serietà</h3>
+            <ul>
+              <li>Chiariamo quantità e condizioni nel preventivo.</li>
+              <li>Hai un referente per seguire il progetto.</li>
+              <li>La produzione parte dopo la conferma e l’approvazione della grafica.</li>
+            </ul>
+          </li>
+          <li class="value-card glass">
+            <span class="value-symbol" aria-hidden="true">↻</span>
+            <h3>Problem solving</h3>
+            <ul>
+              <li>Confrontiamo le alternative per il tuo pubblico.</li>
+              <li>Valutiamo soluzioni in base a budget e scadenza.</li>
+              <li>Se il logo richiede un adattamento, cerchiamo la tecnica adatta.</li>
+            </ul>
+          </li>
+          <li class="value-card glass">
+            <span class="value-symbol" aria-hidden="true">✓</span>
+            <h3>Soddisfazione del cliente</h3>
+            <ul>
+              <li>Scegliamo articoli utili nel tuo contesto.</li>
+              <li>Puoi chiedere una campionatura per valutare il prodotto.</li>
+              <li>Ti confronti con il referente prima di confermare la proposta.</li>
+            </ul>
+          </li>
+          <li class="value-card glass">
+            <span class="value-symbol" aria-hidden="true">♧</span>
+            <h3>Rispetto dell’ambiente</h3>
+            <ul>
+              <li>Valutiamo articoli pensati per essere riutilizzati.</li>
+              <li>Ti aiutiamo a confrontare materiali e durata.</li>
+              <li>Partiamo da quante persone useranno davvero il gadget.</li>
+            </ul>
+          </li>
+          <li class="value-card glass">
+            <span class="value-symbol" aria-hidden="true">♡</span>
+            <h3>Cordialità e gentilezza</h3>
+            <ul>
+              <li>Puoi parlarci del progetto anche senza un articolo in mente.</li>
+              <li>Viviana ti aiuta a orientarti fra le opzioni.</li>
+              <li>Puoi continuare per telefono, email o WhatsApp.</li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </section>
     <section class="wrap section">

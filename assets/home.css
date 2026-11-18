@@ -223,7 +223,6 @@ h1 em { color: #266957; font-family: Georgia, serif; font-weight: 400; letter-sp
   from { translate: -7px 0; }
   to { translate: 7px 0; }
 }
-.values { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .75rem; }
 .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
 .product-card { overflow: hidden; border-radius: 1.35rem; display: block; text-decoration: none; }
 .product-card img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; background: #dbe6d3; }
@@ -253,11 +252,6 @@ h1 em { color: #266957; font-family: Georgia, serif; font-weight: 400; letter-sp
   border-radius: 50%; color: #f2fbe8; background: linear-gradient(140deg, #46826c, #163e34);
   box-shadow: inset 0 1px 0 #fff7, 0 5px 12px #153b3330;
 }
-.values-band { background: linear-gradient(115deg, #dbe9d7, #c3ded8 55%, #f2e6bb); }
-.values-band .section { padding-block: clamp(2.5rem, 5vw, 4.5rem); }
-.values { grid-template-columns: repeat(7, minmax(0, 1fr)); margin-top: 1.8rem; }
-.values li { text-align: center; padding: .8rem .32rem; border-radius: 1rem; font-size: .86rem; font-weight: 750; }
-.values span { display: block; font-size: 1.6rem; color: #296550; }
 .reviews, .content-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .reviews { margin-top: 1.6rem; }
 .tile { border-radius: 1.35rem; padding: clamp(1.2rem, 3vw, 2rem); }
@@ -285,7 +279,6 @@ h1 em { color: #266957; font-family: Georgia, serif; font-weight: 400; letter-sp
 .compact { padding-top: 0; }
 .info-panel { padding: clamp(1.2rem, 3vw, 2rem); margin-bottom: 2rem; }
 @media (max-width: 850px) {
-  .values { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 720px) {
@@ -295,7 +288,7 @@ h1 em { color: #266957; font-family: Georgia, serif; font-weight: 400; letter-sp
   section[id] { scroll-margin-top: 8rem; }
 }
 @media (max-width: 680px) {
-  .product-grid, .values { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .reviews, .content-pair { grid-template-columns: 1fr; }
   .product-card > div { padding-inline: .65rem; }
   .product-card h3 { font-size: 1.08rem; }
