@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Esplora i prodotti per tipo e trova gli articoli da inserire nella tua richiesta di preventivo.">
-  <meta name="theme-color" content="#eaf0e5">
-  <title>Catalogo gadget personalizzati | GadgetRoma</title>
+  <meta name="description" content="Sfoglia i cataloghi GadgetRoma per tipologia, categoria, oggettistica e abbigliamento personalizzato.">
+  <meta name="theme-color" content="#153b32">
+  <title>Cataloghi gadget personalizzati | GadgetRoma</title>
   <link rel="stylesheet" href="../assets/home.css">
+  <link rel="stylesheet" href="../assets/catalogo.css">
+  <script src="../assets/catalogo.js" defer></script>
 </head>
-<body>
+<body class="catalog-page">
   <a class="skip" href="#contenuto">Salta al contenuto</a>
   <header class="top"><div class="wrap nav">
     <a class="brand" href="../"><img src="../assets/gadgetroma-logo.png" width="171" height="53" alt="GadgetRoma, homepage"></a>
@@ -18,35 +20,379 @@
 <a href="../contatti/">Contatti</a></nav>
     <a class="button small" href="#preventivo">Richiedi un preventivo <span aria-hidden="true">→</span></a>
   </div></header>
-  <main id="contenuto" class="wrap">
-    <section class="inner-hero glass">
-      <a class="text-link" href="../">← Homepage</a>
-      <h1>Catalogo gadget personalizzati</h1><p class="lead">Esplora i prodotti per tipo e trova gli articoli da inserire nella tua richiesta di preventivo.</p>
+  <main id="contenuto">
+    <section class="catalog-hero" aria-labelledby="titolo-catalogo">
+      <div class="wrap">
+        <a class="text-link" href="../">← Homepage</a>
+        <h1 id="titolo-catalogo">Cataloghi da sfogliare.</h1>
+        <p>Scegli una tipologia, esplora una categoria o consulta i cataloghi generali. Annota i codici degli articoli che ti interessano per il preventivo.</p>
+      </div>
     </section>
-    
-<section class="section" id="tipologie"><h2>I grandi classici.</h2><p class="section-intro">Le immagini illustrano le tipologie. Colori e modelli disponibili sono indicati nei cataloghi ufficiali.</p><div class="product-grid"><a class="glass product-card" href="../shopper-personalizzate/"><img src="../assets/prodotto-01.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Shopper <span aria-hidden="true">→</span></h3><p>Ideali per fiere e acquisti quotidiani.</p></div></a>
-<a class="glass product-card" href="../borracce-personalizzate/"><img src="../assets/prodotto-02.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Borracce <span aria-hidden="true">→</span></h3><p>Una soluzione riutilizzabile per ufficio ed eventi.</p></div></a>
-<a class="glass product-card" href="../tazze-personalizzate/"><img src="../assets/prodotto-03.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Tazze <span aria-hidden="true">→</span></h3><p>Per l’ufficio e i kit di benvenuto.</p></div></a>
-<a class="glass product-card" href="../notebook-personalizzati/"><img src="../assets/prodotto-04.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Notebook <span aria-hidden="true">→</span></h3><p>Per meeting, corsi e onboarding.</p></div></a>
-<a class="glass product-card" href="../penne-personalizzate/"><img src="../assets/prodotto-05.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Penne <span aria-hidden="true">→</span></h3><p>Un classico da distribuire a fiere e congressi.</p></div></a>
-<a class="glass product-card" href="../abbigliamento-personalizzato/"><img src="../assets/prodotto-06.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>T-shirt <span aria-hidden="true">→</span></h3><p>Per lo staff e l’abbigliamento di squadra.</p></div></a>
-<a class="glass product-card" href="../zaini-personalizzati/"><img src="../assets/prodotto-07.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Sacche <span aria-hidden="true">→</span></h3><p>Leggere e pratiche per sport ed eventi.</p></div></a>
-<a class="glass product-card" href="../power-bank-personalizzati/"><img src="../assets/prodotto-08.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Power bank <span aria-hidden="true">→</span></h3><p>Per chi lavora o viaggia in movimento.</p></div></a>
-<a class="glass product-card" href="../abbigliamento-personalizzato/"><img src="../assets/prodotto-09.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Cappellini <span aria-hidden="true">→</span></h3><p>Per staff e attività all’aperto.</p></div></a>
-<a class="glass product-card" href="https://www.gadgetroma.com/catalogo/"><img src="../assets/prodotto-10.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Spillette <span aria-hidden="true">→</span></h3><p>Per campagne e iniziative di gruppo.</p></div></a>
-<a class="glass product-card" href="../lanyard-personalizzati/"><img src="../assets/prodotto-11.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Lanyard <span aria-hidden="true">→</span></h3><p>Per badge, fiere e conferenze.</p></div></a>
-<a class="glass product-card" href="../ombrelli-personalizzati/"><img src="../assets/prodotto-12.webp" width="1040" height="780" loading="lazy" decoding="async" alt=""><div><h3>Ombrelli <span aria-hidden="true">→</span></h3><p>Un articolo utile anche dopo l’evento.</p></div></a></div></section>
-<section class="section compact" id="cataloghi"><h2>Cataloghi da sfogliare.</h2>
-<div class="cards">
-<article class="glass tile"><h3>Per tipologia</h3><p>Borracce, notebook, penne, accessori e altri articoli.</p><a class="text-link" href="#tipologie">Esplora i prodotti ↑</a></article>
-<article class="glass tile"><h3>Per categoria</h3><p>Green, sport, viaggio, packaging e progetti su misura.</p><a class="text-link" href="../gadget-ecosostenibili-aziende/">Vedi la selezione green →</a><a class="text-link" href="https://www.gadgetroma.com/catalogo/su-misura/">Scopri le soluzioni su misura →</a></article>
-<article class="glass tile"><h3>Generali 2026</h3><p>Raccolte complete di oggettistica e abbigliamento.</p><a class="text-link" href="https://www.gadgetroma.com/catalogo/">Apri il catalogo ufficiale →</a></article>
-</div></section>
-    <section class="section quote-section" id="preventivo"><div class="quote">
-      <div><p class="eyebrow">Preventivo</p><h2>Hai un progetto in mente?</h2><p>Indica quantità, budget ed eventuale scadenza. Se hai scelto gli articoli, aggiungi i loro codici.</p></div>
-      <div class="quote-action"><a class="button" href="https://www.gadgetroma.com/richiestepreventivo/">Apri il modulo preventivi <span aria-hidden="true">→</span></a>
-<a class="contact" href="../contatti/">Parla con GadgetRoma</a></div>
-    </div></section>
+
+    <div class="wrap">
+      <div class="catalog-index">
+        <nav aria-label="Indice dei cataloghi">
+          <a href="#tipologie"><strong>Per tipologia</strong><span>15 raccolte <span aria-hidden="true">↓</span></span></a>
+          <a href="#categorie"><strong>Per categoria</strong><span>8 raccolte <span aria-hidden="true">↓</span></span></a>
+          <a href="#cataloghi"><strong>Cataloghi generali 2025</strong><span>12 cataloghi <span aria-hidden="true">↓</span></span></a>
+        </nav>
+        <div class="catalog-search" hidden>
+          <label for="cerca-catalogo">Cerca nel catalogo</label>
+          <input type="search" id="cerca-catalogo" placeholder="Per esempio: bottiglie, sport, abbigliamento">
+          <p class="catalog-search-status" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <section class="catalog-section" id="tipologie" aria-labelledby="titolo-tipologie" data-catalog-section>
+        <h2 id="titolo-tipologie">Cataloghi per tipologia</h2>
+        <ul class="catalog-grid" data-catalog-group>
+          <li class="catalog-card" data-catalog-card data-search="Bottiglie">
+            <a href="https://www.gadgetroma.com/cataloghi/25/borracce/flip/catalogo_gadget_bottiglie.html" target="_blank" rel="noopener" aria-label="Apri Bottiglie in una nuova scheda">
+              <img src="../assets/catalogo/guida-01.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Bottiglie</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Braccialetti">
+            <a href="https://www.gadgetroma.com/cataloghi/25/braccialetti/flip/catalogo_gadget_braccialetti.html" target="_blank" rel="noopener" aria-label="Apri Braccialetti in una nuova scheda">
+              <img src="../assets/catalogo/guida-02.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Braccialetti</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Collarini &amp; Spillette">
+            <a href="https://www.gadgetroma.com/cataloghi/25/collarini/flip/catalogo_gadget_collarini.html" target="_blank" rel="noopener" aria-label="Apri Collarini &amp; Spillette in una nuova scheda">
+              <img src="../assets/catalogo/guida-03.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Collarini &amp; Spillette</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Memorie USB">
+            <a href="https://www.gadgetroma.com/cataloghi/25/usb/flip/catalogo_gadget_memorieusb.html" target="_blank" rel="noopener" aria-label="Apri Memorie USB in una nuova scheda">
+              <img src="../assets/catalogo/guida-04.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Memorie USB</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Notebook">
+            <a href="https://www.gadgetroma.com/cataloghi/25/notebook/flip/catalogo_gadget_notes.html" target="_blank" rel="noopener" aria-label="Apri Notebook in una nuova scheda">
+              <img src="../assets/catalogo/guida-05.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Notebook</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Ombrelli">
+            <a href="https://www.gadgetroma.com/cataloghi/25/ombrelli/flip/catalogo_gadget_ombrelli.html" target="_blank" rel="noopener" aria-label="Apri Ombrelli in una nuova scheda">
+              <img src="../assets/catalogo/guida-06.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Ombrelli</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Penne &amp; Matite">
+            <a href="https://www.gadgetroma.com/cataloghi/25/penne/flip/catalogo_gadget_penne.html" target="_blank" rel="noopener" aria-label="Apri Penne &amp; Matite in una nuova scheda">
+              <img src="../assets/catalogo/guida-07.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Penne &amp; Matite</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Porta computer">
+            <a href="https://www.gadgetroma.com/cataloghi/25/portacomputer/flip/catalogo_gadget_zaini_portacomputer.html" target="_blank" rel="noopener" aria-label="Apri Porta computer in una nuova scheda">
+              <img src="../assets/catalogo/guida-08.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Porta computer</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Porta documenti &amp; Porta blocco">
+            <a href="https://www.gadgetroma.com/cataloghi/25/portablocco/flip/catalogo_gadget_portadocumenti.html" target="_blank" rel="noopener" aria-label="Apri Porta documenti &amp; Porta blocco in una nuova scheda">
+              <img src="../assets/catalogo/guida-09.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Porta documenti &amp; Porta blocco</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Portachiavi">
+            <a href="https://www.gadgetroma.com/cataloghi/25/portachiavi/flip/catalogo_gadget_portachiavi.html" target="_blank" rel="noopener" aria-label="Apri Portachiavi in una nuova scheda">
+              <img src="../assets/catalogo/guida-10.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Portachiavi</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Power bank &amp; Stazioni ricarica">
+            <a href="https://www.gadgetroma.com/cataloghi/25/powerbank/flip/catalogo_gadget_powerbank.html" target="_blank" rel="noopener" aria-label="Apri Power bank &amp; Stazioni ricarica in una nuova scheda">
+              <img src="../assets/catalogo/guida-11.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Power bank &amp; Stazioni ricarica</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Shopping bag">
+            <a href="https://www.gadgetroma.com/cataloghi/25/shopper/flip/catalogo_gadget_shopper.html" target="_blank" rel="noopener" aria-label="Apri Shopping bag in una nuova scheda">
+              <img src="../assets/catalogo/guida-12.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Shopping bag</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Tazze &amp; Bicchieri">
+            <a href="https://www.gadgetroma.com/cataloghi/25/tazze/flip/catalogo_gadget_tazze.html" target="_blank" rel="noopener" aria-label="Apri Tazze &amp; Bicchieri in una nuova scheda">
+              <img src="../assets/catalogo/guida-13.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Tazze &amp; Bicchieri</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Teli &amp; Asciugamani">
+            <a href="https://www.gadgetroma.com/cataloghi/25/teli/flip/catalogo_gadget_teli.html" target="_blank" rel="noopener" aria-label="Apri Teli &amp; Asciugamani in una nuova scheda">
+              <img src="../assets/catalogo/guida-14.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Teli &amp; Asciugamani</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Zaini &amp; Sacche">
+            <a href="https://www.gadgetroma.com/cataloghi/25/zaini/catalogo_gadget_zaini.pdf" target="_blank" rel="noopener" aria-label="Apri Zaini &amp; Sacche in una nuova scheda">
+              <img src="../assets/catalogo/guida-15.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Zaini &amp; Sacche</h3>
+                <span>PDF <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="catalog-section" id="categorie" aria-labelledby="titolo-categorie" data-catalog-section>
+        <h2 id="titolo-categorie">Cataloghi per categoria</h2>
+        <ul class="catalog-grid" data-catalog-group>
+          <li class="catalog-card" data-catalog-card data-search="#bestchoice – Green">
+            <a href="https://www.gadgetroma.com/cataloghi/24/flip/green/flip/mobile/index.html" target="_blank" rel="noopener" aria-label="Apri #bestchoice – Green in una nuova scheda">
+              <img src="../assets/catalogo/guida-16.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>#bestchoice – Green</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Bambini">
+            <a href="https://www.gadgetroma.com/cataloghi/25/bambini/flip/catalogo_gadget_BAMBINI.html" target="_blank" rel="noopener" aria-label="Apri Bambini in una nuova scheda">
+              <img src="../assets/catalogo/guida-17.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Bambini</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Beauty">
+            <a href="https://www.gadgetroma.com/cataloghi/25/beauty/flip/catalogo_gadget_beauty.html" target="_blank" rel="noopener" aria-label="Apri Beauty in una nuova scheda">
+              <img src="../assets/catalogo/guida-18.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Beauty</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Casa">
+            <a href="https://www.gadgetroma.com/cataloghi/25/casa/flip/catalogo_gadget_casa.html" target="_blank" rel="noopener" aria-label="Apri Casa in una nuova scheda">
+              <img src="../assets/catalogo/guida-19.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Casa</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="In viaggio">
+            <a href="https://www.gadgetroma.com/cataloghi/25/viaggio/flip/catalogo_gadget_viaggio.html" target="_blank" rel="noopener" aria-label="Apri In viaggio in una nuova scheda">
+              <img src="../assets/catalogo/guida-20.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>In viaggio</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Packaging">
+            <a href="https://www.gadgetroma.com/cataloghi/25/packaging/flip/catalogo_gadget_packaging.html" target="_blank" rel="noopener" aria-label="Apri Packaging in una nuova scheda">
+              <img src="../assets/catalogo/guida-21.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Packaging</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Sport">
+            <a href="https://www.gadgetroma.com/cataloghi/25/sport/catalogo_gadget_sport.pdf" target="_blank" rel="noopener" aria-label="Apri Sport in una nuova scheda">
+              <img src="../assets/catalogo/guida-22.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Sport</h3>
+                <span>PDF <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Su misura">
+            <a href="https://www.gadgetroma.com/cataloghi/25/sumisura/flip/catalogo_gadget_sumisura.html" target="_blank" rel="noopener" aria-label="Apri Su misura in una nuova scheda">
+              <img src="../assets/catalogo/guida-23.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h3>Su misura</h3>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="catalog-section" id="cataloghi" aria-labelledby="titolo-generali" data-catalog-section>
+        <h2 id="titolo-generali">Cataloghi generali 2025</h2>
+        <div class="catalog-general" data-catalog-group>
+          <h3>Oggettistica</h3>
+          <ul class="catalog-grid" aria-label="Cataloghi di oggettistica">
+          <li class="catalog-card" data-catalog-card data-search="Oggettistica 1">
+            <a href="https://view.publitas.com/md-it/gifts_ita_eur/page/1" target="_blank" rel="noopener" aria-label="Apri Oggettistica 1 in una nuova scheda">
+              <img src="../assets/catalogo/guida-24.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>1</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Oggettistica 2 | Fast">
+            <a href="https://catalog.on-catalogue.com/view/749386032/" target="_blank" rel="noopener" aria-label="Apri Oggettistica 2 | Fast in una nuova scheda">
+              <img src="../assets/catalogo/guida-25.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>2 | Fast</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Oggettistica 3">
+            <a href="https://generalcatalogue2025.eu/6aca473ef2107957d9e6fa9a60923698/" target="_blank" rel="noopener" aria-label="Apri Oggettistica 3 in una nuova scheda">
+              <img src="../assets/catalogo/guida-26.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>3</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Oggettistica 4">
+            <a href="https://www.coolcatalogue.eu/wp/it_1o69hzj6o/#p=I" target="_blank" rel="noopener" aria-label="Apri Oggettistica 4 in una nuova scheda">
+              <img src="../assets/catalogo/guida-27.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>4</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Oggettistica 5 | Premium">
+            <a href="https://viewer.xdcollection.com/tgb25/it/eur/?page=1" target="_blank" rel="noopener" aria-label="Apri Oggettistica 5 | Premium in una nuova scheda">
+              <img src="../assets/catalogo/guida-28.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>5 | Premium</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Oggettistica 6 | Fast">
+            <a href="https://www.flipsnack.com/5FC8BABBDC9/novita-promobusiness-2025-ita/full-view.html" target="_blank" rel="noopener" aria-label="Apri Oggettistica 6 | Fast in una nuova scheda">
+              <img src="../assets/catalogo/guida-29.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>6 | Fast</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          </ul>
+        </div>
+        <div class="catalog-general" data-catalog-group>
+          <h3>Abbigliamento</h3>
+          <ul class="catalog-grid" aria-label="Cataloghi di abbigliamento">
+          <li class="catalog-card" data-catalog-card data-search="Abbigliamento 1 | Clique">
+            <a href="https://viewer.joomag.com/clique-2025-italy/0034012001736945707?short&amp;" target="_blank" rel="noopener" aria-label="Apri Abbigliamento 1 | Clique in una nuova scheda">
+              <img src="../assets/catalogo/guida-30.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>1 | Clique</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Abbigliamento 2">
+            <a href="https://pm7.it/catalogo/IT_PRICE/" target="_blank" rel="noopener" aria-label="Apri Abbigliamento 2 in una nuova scheda">
+              <img src="../assets/catalogo/guida-31.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>2</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Abbigliamento 3">
+            <a href="https://files.europeancatalog.fr/media/customer/outils-marketing/catalogues/2025/EuropeanTextileCatalogue2025-IT/" target="_blank" rel="noopener" aria-label="Apri Abbigliamento 3 in una nuova scheda">
+              <img src="../assets/catalogo/guida-32.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>3</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Abbigliamento 4 | Lavoro">
+            <a href="https://viewer.joomag.com/2025-projob-workwear-it/0242324001740129593/p1?short=" target="_blank" rel="noopener" aria-label="Apri Abbigliamento 4 | Lavoro in una nuova scheda">
+              <img src="../assets/catalogo/guida-33.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>4 | Lavoro</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Abbigliamento 5 | Professionale">
+            <a href="https://pm7.it/catalogo/fornitori/Premier_EN/" target="_blank" rel="noopener" aria-label="Apri Abbigliamento 5 | Professionale in una nuova scheda">
+              <img src="../assets/catalogo/guida-34.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>5 | Professionale</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          <li class="catalog-card" data-catalog-card data-search="Abbigliamento 6 | Fast">
+            <a href="https://www.flipsnack.com/5FC8BABBDC9/novita-promobusiness-2025-ita/full-view.html" target="_blank" rel="noopener" aria-label="Apri Abbigliamento 6 | Fast in una nuova scheda">
+              <img src="../assets/catalogo/guida-35.webp" width="270" height="208" alt="" loading="lazy" decoding="async">
+              <div class="catalog-card-caption">
+                <h4>6 | Fast</h4>
+                <span>Sfoglia <span aria-hidden="true">↗</span></span>
+              </div>
+            </a>
+          </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="preventivo" class="catalog-section catalog-quote" aria-labelledby="titolo-preventivo">
+        <h2 id="titolo-preventivo">Hai trovato gli articoli?</h2>
+        <p>Indicaci i codici, le quantità e la data entro cui ti servono. Se hai bisogno di aiuto nella scelta, contattaci.</p>
+        <div class="actions">
+          <a class="button" href="https://www.gadgetroma.com/richiestepreventivo/">Richiedi un preventivo <span aria-hidden="true">→</span></a>
+          <a class="text-link" href="../contatti/">Parla con noi <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+    </div>
   </main>
   <footer class="wrap footer"><a href="../">GadgetRoma</a><span>Roma · San Giovanni</span><a href="mailto:info@gadgetroma.com">info@gadgetroma.com</a>
 <a href="https://www.gadgetroma.com/privacy-policy/">Privacy</a></footer>

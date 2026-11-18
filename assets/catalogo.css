@@ -1,0 +1,104 @@
+.catalog-page { background: #eef3e9; }
+.catalog-page .wrap { width: min(1400px, calc(100% - 2 * clamp(1rem, 4vw, 4.5rem))); }
+.catalog-page [hidden] { display: none !important; }
+.catalog-hero {
+  padding-block: clamp(3.4rem, 9vw, 8rem);
+  background: linear-gradient(90deg, #0d2e26fc 12%, #10392de8 38%, #10392d28 86%),
+              #163c31 url("kit-editoriale.webp") center 53% / cover;
+  color: #f6fff2;
+}
+.catalog-hero h1 { max-width: 12ch; margin-block: 1.2rem .85rem; font-size: clamp(3rem, 8vw, 7rem); }
+.catalog-hero p { max-width: 43ch; font-size: clamp(1rem, 1.65vw, 1.22rem); color: #e4f5df; }
+.catalog-hero a:focus-visible, .catalog-quote a:focus-visible { outline-color: #d8f58c; }
+.catalog-index {
+  position: relative;
+  margin-top: -1.1rem;
+  padding: clamp(.85rem, 2.1vw, 1.6rem);
+  border: 1px solid #fff;
+  border-radius: 1.6rem;
+  background: #f9fff4;
+  box-shadow: 0 20px 60px #234a321d;
+}
+.catalog-index nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
+.catalog-index nav a {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  justify-content: space-between;
+  min-height: 4.8rem;
+  padding: .75rem 1rem;
+  border-radius: .85rem;
+  background: #e8f1df;
+  text-decoration: none;
+}
+.catalog-index nav a:hover { background: #dcebd0; }
+.catalog-index nav a > span { color: #38594e; font-size: .85rem; }
+.catalog-search { display: grid; gap: .45rem; margin-top: 1rem; font-size: .92rem; }
+.catalog-search label { font-weight: 750; }
+.catalog-search input {
+  width: min(100%, 35rem);
+  min-height: 2.85rem;
+  padding-inline: .85rem;
+  border: 1px solid #9bb6a3;
+  border-radius: .7rem;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+.catalog-search input:focus-visible { outline: 2px solid #477b63; outline-offset: 2px; }
+.catalog-search-status { color: var(--muted); }
+.catalog-search-status:empty { display: none; }
+.catalog-section { padding-top: clamp(3.2rem, 6vw, 6rem); }
+.catalog-section h2 { text-wrap: pretty; }
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(.65rem, 1.5vw, 1.4rem);
+  list-style: none;
+  padding: 0;
+  margin: clamp(1.2rem, 2.5vw, 2.2rem) 0 0;
+}
+.catalog-card { display: flex; min-width: 0; }
+.catalog-card a {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1.15rem;
+  border: 1px solid #fff;
+  background: #fafff6;
+  box-shadow: 0 10px 26px #25463714;
+  text-decoration: none;
+}
+.catalog-card a:hover { background: #f0fae5; }
+.catalog-card img { width: 100%; height: auto; aspect-ratio: 270 / 208; object-fit: cover; background: #eff1ed; }
+.catalog-card-caption { display: flex; flex: 1; flex-direction: column; justify-content: space-between; gap: .65rem; padding: .85rem; }
+.catalog-card-caption :is(h3, h4) { font-size: clamp(1rem, 1.25vw, 1.25rem); margin: 0; line-height: 1.15; overflow-wrap: anywhere; }
+.catalog-card-caption > span { display: flex; align-items: center; justify-content: space-between; color: #38594e; font-size: .8rem; font-weight: 700; }
+.catalog-general { margin-top: 2rem; }
+.catalog-general > h3 { font-size: clamp(1.4rem, 2.8vw, 2rem); }
+.catalog-general .catalog-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 1rem; }
+.catalog-quote {
+  margin-block: clamp(3rem, 7vw, 6rem) min(5vw, 3rem);
+  padding: clamp(1.35rem, 5vw, 4rem);
+  border-radius: 1.7rem;
+  background: #123d32;
+  color: #f6fff2;
+}
+.catalog-quote p { margin-top: .7rem; max-width: 58ch; }
+@media (prefers-reduced-motion: no-preference) {
+  .catalog-card a, .catalog-card img { transition: transform .25s ease, background-color .2s ease; }
+  .catalog-card a:hover { transform: translateY(-3px); }
+  .catalog-card a:hover img { transform: scale(1.035); }
+}
+@media (max-width: 1020px) {
+  .catalog-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .catalog-general .catalog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .catalog-hero { background-position: 58% center; }
+  .catalog-index nav { grid-template-columns: 1fr; }
+  .catalog-index nav a { flex-direction: row; align-items: center; min-height: 3rem; padding-inline: .7rem; }
+  .catalog-index nav a > span { flex-shrink: 0; }
+  .catalog-grid, .catalog-general .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
