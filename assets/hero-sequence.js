@@ -16,6 +16,8 @@ if (sequenceSource) {
   let ready = false;
   let playing = false;
   let lastWheel = -Infinity;
+  let lastWheelAdvance = -Infinity;
+  let wheelTravel = 0;
   let touchStart;
   let touchConsumed = false;
 
@@ -52,12 +54,10 @@ if (sequenceSource) {
   }
 
   function stopAtClipEnd() {
-    if (!playing || sequenceVideo.currentTime < clipEnd - lastFrameOffset) return;
+    if (!playing || sequenceVideo.seeking || sequenceVideo.currentTime < clipEnd - lastFrameOffset) return;
     sequenceVideo.pause();
     if (sequenceVideo.currentTime >= clipEnd) sequenceVideo.currentTime = clipEnd - lastFrameOffset * 0.5;
     playing = false;
-    nextClip += 1;
-    if (nextClip === clipCount) heroSequence.classList.remove('clip-navigation');
     cancelAnimationFrame(frame);
   }
 
@@ -67,13 +67,15 @@ if (sequenceSource) {
   }
 
   function playNextClip() {
-    if (playing) return;
+    cancelAnimationFrame(frame);
     const clip = nextClip;
+    nextClip += 1;
+    if (nextClip === clipCount) heroSequence.classList.remove('clip-navigation');
     clipEnd = (clip + 1) * clipDuration;
     playing = true;
     sequenceVideo.currentTime = clip * clipDuration;
     sequenceVideo.play().catch(() => {
-      if (playing && nextClip === clip) showStaticHero();
+      if (playing && nextClip === clip + 1) showStaticHero();
     });
     frame = requestAnimationFrame(watchPlayback);
   }
@@ -89,16 +91,24 @@ if (sequenceSource) {
     if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
     const newGesture = event.timeStamp - lastWheel > 160;
     lastWheel = event.timeStamp;
+    if (newGesture || event.deltaY <= 0) wheelTravel = 0;
     if (event.deltaY <= 0 || !event.cancelable) return;
+
+    const pixelsPerUnit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1;
+    wheelTravel += event.deltaY * pixelsPerUnit;
+    const advance = newGesture || (event.timeStamp - lastWheelAdvance >= 360 && wheelTravel >= 240);
     if (!canAdvance()) {
-      // Keep the tail of the final gesture from pulling the hero off screen.
-      if (ready && nextClip === clipCount && !newGesture && heroSequence.getBoundingClientRect().bottom > innerHeight - 2) {
+      if (ready && nextClip === clipCount && !advance && heroSequence.getBoundingClientRect().bottom > innerHeight - 2) {
         event.preventDefault();
       }
       return;
     }
     event.preventDefault();
-    if (newGesture) playNextClip();
+    if (advance) {
+      lastWheelAdvance = event.timeStamp;
+      wheelTravel = 0;
+      playNextClip();
+    }
   }, { passive: false });
 
   window.addEventListener('touchstart', (event) => {
