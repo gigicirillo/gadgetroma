@@ -58,7 +58,8 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
 
   const targets = document.querySelectorAll(
     'main section > :is(h2, p), .hero-copy > *, .hero-art, .facts > li, .trust, ' +
-    '.card, .product-card, .feature, .steps li, .values-intro, .value-card, .tile, .faq-list details, .quote',
+    '.card, .product-card, .feature, .steps li, .process-stage, .values-intro, .value-card, .review-heading, ' +
+    '.tile, .faq-band h2, .faq-band .eyebrow, .faq-list details, .faq-band .button, .quote',
   );
   targets.forEach((element, index) => {
     element.style.setProperty('--entry-delay', `${(index % 4) * 45}ms`);
@@ -67,7 +68,7 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
   });
 }
 
-document.querySelectorAll('.card, .product-card, .feature, .steps li, .facts li, .tile, .hero-art').forEach((element) => {
+document.querySelectorAll('.card, .product-card, .feature, .steps li, .facts li, .tile, .faq-cubes details, .hero-art').forEach((element) => {
   element.classList.add('pointer-depth');
   element.addEventListener('pointermove', (event) => {
     if (!finePointer.matches || motionPreference.matches || event.pointerType !== 'mouse') return;
@@ -81,6 +82,40 @@ document.querySelectorAll('.card, .product-card, .feature, .steps li, .facts li,
     element.style.setProperty('--shadow-x', `${(0.5 - x) * 22}px`);
   }, { passive: true });
 });
+
+const processStory = document.querySelector('.process-story');
+if (processStory) {
+  const steps = [...processStory.querySelectorAll('.process-step')];
+  const pictures = [...processStory.querySelectorAll('.process-stage img')];
+  const wideLayout = window.matchMedia('(min-width: 850px)');
+  let activeStep = 0;
+  let frame;
+
+  function updateProcess() {
+    frame = undefined;
+    if (!wideLayout.matches) return;
+    const readingLine = window.innerHeight * 0.55;
+    const current = steps.findIndex((step) => step.getBoundingClientRect().bottom >= readingLine);
+    const nextStep = current === -1 ? steps.length - 1 : current;
+    if (nextStep === activeStep) return;
+
+    pictures[activeStep].classList.remove('active');
+    steps[activeStep].removeAttribute('aria-current');
+    pictures[nextStep].classList.add('active');
+    steps[nextStep].setAttribute('aria-current', 'step');
+    activeStep = nextStep;
+  }
+
+  function scheduleProcess() {
+    if (frame === undefined) frame = requestAnimationFrame(updateProcess);
+  }
+
+  steps[0].setAttribute('aria-current', 'step');
+  processStory.classList.add('enhanced');
+  window.addEventListener('scroll', scheduleProcess, { passive: true });
+  window.addEventListener('resize', scheduleProcess);
+  scheduleProcess();
+}
 
 const heroVideo = document.querySelector('.hero-art video');
 if (heroVideo) {
