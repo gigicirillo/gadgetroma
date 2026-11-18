@@ -86,14 +86,23 @@ document.querySelectorAll('.card, .product-card, .feature, .steps li, .facts li,
 const processStory = document.querySelector('.process-story');
 if (processStory) {
   const steps = [...processStory.querySelectorAll('.process-step')];
-  const pictures = [...processStory.querySelectorAll('.process-stage img')];
+  const processIntro = processStory.querySelector('.process-intro');
+  const processStage = processStory.querySelector('.process-stage');
+  const pictures = [...processStage.querySelectorAll('img')];
   const wideLayout = window.matchMedia('(min-width: 850px)');
   let activeStep = 0;
   let frame;
 
   function updateProcess() {
     frame = undefined;
-    if (!wideLayout.matches) return;
+    if (!wideLayout.matches) {
+      processStory.classList.remove('heading-over-image');
+      return;
+    }
+    const stickyInset = parseFloat(getComputedStyle(processIntro).top);
+    const stageReachesPin = processStory.getBoundingClientRect().top <= stickyInset + 1;
+    processStory.classList.toggle('heading-over-image', stageReachesPin);
+
     const readingLine = window.innerHeight * 0.55;
     const current = steps.findIndex((step) => step.getBoundingClientRect().bottom >= readingLine);
     const nextStep = current === -1 ? steps.length - 1 : current;
@@ -113,8 +122,16 @@ if (processStory) {
   steps[0].setAttribute('aria-current', 'step');
   processStory.classList.add('enhanced');
   window.addEventListener('scroll', scheduleProcess, { passive: true });
-  window.addEventListener('resize', scheduleProcess);
-  scheduleProcess();
+  function measureProcess() {
+    if (wideLayout.matches) {
+      processIntro.style.setProperty('--process-heading-offset', `${processStage.offsetTop}px`);
+    }
+    scheduleProcess();
+  }
+
+  window.addEventListener('resize', measureProcess);
+  new ResizeObserver(measureProcess).observe(processStory.querySelector('.process-heading'));
+  measureProcess();
 }
 
 const reviewTrack = document.querySelector('#recensioni');
