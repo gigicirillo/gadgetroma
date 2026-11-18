@@ -58,7 +58,7 @@ if ('IntersectionObserver' in window && !motionPreference.matches) {
 
   const targets = document.querySelectorAll(
     'main section > :is(h2, p), .hero-copy > *, .facts > li, .trust, ' +
-    '.card, .product-card, .feature, .steps li, .process-stage, .values-intro, .value-card, .review-heading, ' +
+    '.card, .product-card, .feature, .steps li, .process-intro, .values-intro, .value-card, .review-heading, ' +
     '.tile, .faq-band h2, .faq-band .eyebrow, .faq-list details, .faq-band .button, .quote',
   );
   targets.forEach((element, index) => {

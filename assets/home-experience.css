@@ -41,12 +41,11 @@
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   align-items: start;
   gap: clamp(1.25rem, 5vw, 6rem);
-  margin-top: 2rem;
 }
+.process-intro { grid-column: 1 / -1; }
 .process-stage {
   display: none;
-  position: sticky;
-  top: 7.5rem;
+  position: relative;
   aspect-ratio: 4 / 3;
   max-height: 67vh;
   border-radius: 1.7rem;
@@ -60,7 +59,28 @@
 .process-story .process-step { border-color: #fff; }
 .process-inline-art { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .8rem; margin-bottom: 1rem; }
 @media (min-width: 850px) {
+  .process-story.enhanced .process-intro {
+    grid-column: 1;
+    position: sticky;
+    top: 7.5rem;
+    isolation: isolate;
+  }
   .process-story.enhanced .process-stage { display: block; }
+  .process-story.enhanced .process-heading {
+    position: absolute;
+    z-index: 1;
+    inset: auto 0 0;
+    padding: clamp(1.2rem, 3vw, 2.8rem);
+    border-radius: 0 0 1.7rem 1.7rem;
+    background: linear-gradient(0deg, #0b2823f5, #0b2823bb 68%, transparent);
+    color: #f5fff3;
+    pointer-events: none;
+  }
+  .process-story.enhanced .process-heading .eyebrow { color: #dcf591; margin-bottom: .55rem; }
+  .process-story.enhanced .process-heading h2 {
+    max-width: 16ch;
+    font-size: clamp(1.8rem, 3.35vw, 3.7rem);
+  }
   .process-story.enhanced .steps { grid-column: 2; grid-template-columns: 1fr; gap: clamp(1rem, 5vh, 3rem); }
   .process-story.enhanced .process-step { display: grid; align-content: center; min-height: clamp(14rem, 36vh, 25rem); padding: clamp(1.5rem, 4vw, 3.5rem); }
   .process-story.enhanced .process-inline-art { display: none; }
