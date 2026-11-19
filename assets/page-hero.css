@@ -1,0 +1,25 @@
+/* Shared layout for the main interior pages. */
+.interior-page .wrap { width: min(1400px, calc(100% - 2 * clamp(1rem, 4vw, 4.5rem))); }
+.page-hero {
+  padding-block: clamp(3.4rem, 9vw, 8rem);
+  background: linear-gradient(90deg, #0d2e26fc 12%, #10392de8 38%, #10392d28 86%),
+              #163c31 var(--hero-image) var(--hero-position, center 53%) / cover;
+  color: #f6fff2;
+}
+.page-hero h1 { max-width: 12ch; margin-block: 1.2rem .85rem; font-size: clamp(3rem, 8vw, 7rem); }
+.page-hero p { max-width: 43ch; font-size: clamp(1rem, 1.65vw, 1.22rem); color: #e4f5df; }
+.page-hero a:focus-visible { outline-color: #d8f58c; }
+
+.page-hero .button { margin-top: 1.4rem; }
+.page-hero p + p { margin-top: .7rem; }
+.page-hero .hero-secondary { display: inline-block; margin: 1rem 0 0 1rem; }
+.page-hero--catalog { --hero-image: url("kit-editoriale.webp"); }
+.page-hero--techniques { --hero-image: url("servizio-bozza.webp"); }
+.page-hero--faq { --hero-image: url("kit-editoriale.webp"); }
+.page-hero--contacts { --hero-image: url("servizio-referente.webp"); }
+.page-hero--quote { --hero-image: url("preventivo-editoriale.webp"); }
+
+@media (max-width: 680px) {
+  .page-hero { background-position: 58% center; }
+  .page-hero .hero-secondary { display: block; margin-inline-start: 0; }
+}

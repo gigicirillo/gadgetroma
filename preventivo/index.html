@@ -6,10 +6,11 @@
   <title>Richiedi un preventivo | GadgetRoma</title>
   <meta name="description" content="Descrivi il tuo progetto e prepara la richiesta di preventivo per gadget e abbigliamento personalizzati.">
   <link rel="stylesheet" href="../assets/home.css">
+  <link rel="stylesheet" href="../assets/page-hero.css">
   <link rel="stylesheet" href="../assets/lavorazioni.css">
   <script src="../assets/preventivo.js" defer></script>
 </head>
-<body>
+<body class="interior-page">
   <a class="skip" href="#contenuto">Salta al contenuto</a>
   <header class="top"><div class="wrap nav">
     <a class="brand" href="../"><img src="../assets/gadgetroma-logo.png" width="171" height="53" alt="GadgetRoma, homepage"></a>
@@ -19,15 +20,18 @@
 <a href="../contatti/">Contatti</a></nav>
     <a class="button small" href="#richiesta" aria-current="page">Richiedi un preventivo <span aria-hidden="true">→</span></a>
   </div></header>
-  <main id="contenuto" class="wrap">
-    <section class="quote-page" aria-labelledby="titolo-richiesta">
-      <div class="quote-intro">
-        <p class="eyebrow">Gadget personalizzati</p>
+  <main id="contenuto">
+    <section class="page-hero page-hero--quote" aria-labelledby="titolo-richiesta">
+      <div class="wrap">
+        <a class="text-link" href="../">← Homepage</a>
         <h1 id="titolo-richiesta">Richiedi un preventivo.</h1>
-        <p class="lead">Raccontaci cosa vuoi realizzare. Se hai già scelto gli articoli, indicaci i codici e le quantità.</p>
+        <p>Raccontaci cosa vuoi realizzare. Se hai già scelto gli articoli, indicaci i codici e le quantità.</p>
         <p>Ordine minimo di 250 € + IVA.</p>
-        <a class="text-link" href="../catalogo/">Sfoglia i cataloghi →</a>
+        <a class="button" href="#richiesta">Compila il modulo ↓</a>
+        <a class="text-link hero-secondary" href="../catalogo/">Sfoglia i cataloghi →</a>
       </div>
+    </section>
+    <section class="section wrap" aria-label="Modulo di preventivo">
       <div class="glass quote-form-card" id="richiesta">
         <form id="quote-form" hidden>
           <p>I campi contrassegnati con * sono obbligatori.</p>

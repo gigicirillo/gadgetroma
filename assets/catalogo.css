@@ -1,15 +1,6 @@
 .catalog-page { background: #eef3e9; }
-.catalog-page .wrap { width: min(1400px, calc(100% - 2 * clamp(1rem, 4vw, 4.5rem))); }
 .catalog-page [hidden] { display: none !important; }
-.catalog-hero {
-  padding-block: clamp(3.4rem, 9vw, 8rem);
-  background: linear-gradient(90deg, #0d2e26fc 12%, #10392de8 38%, #10392d28 86%),
-              #163c31 url("kit-editoriale.webp") center 53% / cover;
-  color: #f6fff2;
-}
-.catalog-hero h1 { max-width: 12ch; margin-block: 1.2rem .85rem; font-size: clamp(3rem, 8vw, 7rem); }
-.catalog-hero p { max-width: 43ch; font-size: clamp(1rem, 1.65vw, 1.22rem); color: #e4f5df; }
-.catalog-hero a:focus-visible, .catalog-quote a:focus-visible { outline-color: #d8f58c; }
+.catalog-quote a:focus-visible { outline-color: #d8f58c; }
 .catalog-index {
   position: relative;
   margin-top: -1.1rem;
@@ -96,7 +87,6 @@
   .catalog-general .catalog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 680px) {
-  .catalog-hero { background-position: 58% center; }
   .catalog-index nav { grid-template-columns: 1fr; }
   .catalog-index nav a { flex-direction: row; align-items: center; min-height: 3rem; padding-inline: .7rem; }
   .catalog-index nav a > span { flex-shrink: 0; }
