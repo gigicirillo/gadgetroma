@@ -9,7 +9,7 @@ if (sequenceSource) {
   const clipDuration = 5;
   const clipCount = 5;
   const lastFrameOffset = 1 / 24;
-  let nextClip = 0;
+  let activeClip = -1;
   let clipEnd = 0;
   let frame = 0;
   let timeout;
@@ -18,8 +18,9 @@ if (sequenceSource) {
   let lastWheel = -Infinity;
   let lastWheelAdvance = -Infinity;
   let wheelTravel = 0;
+  let wheelDirection = 0;
   let touchStart;
-  let touchConsumed = false;
+  let touchDirection = 0;
 
   function sizeStage() {
     const headerHeight = header.getBoundingClientRect().height;
@@ -31,7 +32,7 @@ if (sequenceSource) {
     cancelAnimationFrame(frame);
     ready = false;
     playing = false;
-    nextClip = 0;
+    activeClip = -1;
     sequenceVideo.pause();
     sequenceArt.classList.remove('has-frame');
     heroSequence.classList.remove('clip-navigation');
@@ -66,39 +67,47 @@ if (sequenceSource) {
     if (playing) frame = requestAnimationFrame(watchPlayback);
   }
 
-  function playNextClip() {
+  function playClip(direction) {
     cancelAnimationFrame(frame);
-    const clip = nextClip;
-    nextClip += 1;
-    if (nextClip === clipCount) heroSequence.classList.remove('clip-navigation');
+    const clip = Math.max(0, activeClip + direction);
+    activeClip = clip;
+    heroSequence.classList.toggle('clip-navigation', clip < clipCount - 1);
     clipEnd = (clip + 1) * clipDuration;
     playing = true;
     sequenceVideo.currentTime = clip * clipDuration;
-    sequenceVideo.play().catch(() => {
-      if (playing && nextClip === clip + 1) showStaticHero();
+    sequenceVideo.play().catch((error) => {
+      if (error.name !== 'AbortError' && playing && activeClip === clip) showStaticHero();
     });
     frame = requestAnimationFrame(watchPlayback);
   }
 
-  function canAdvance() {
-    if (!ready || nextClip >= clipCount) return false;
+  function inHero() {
+    if (!ready) return false;
     const { top, bottom } = heroSequence.getBoundingClientRect();
     const headerBottom = header.getBoundingClientRect().bottom;
     return top <= headerBottom + 1 && bottom > headerBottom + 1;
   }
 
+  function canPlay(direction) {
+    return direction !== 0 && inHero() &&
+      (direction > 0 ? activeClip < clipCount - 1 : activeClip > 0);
+  }
+
   window.addEventListener('wheel', (event) => {
-    if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-    const newGesture = event.timeStamp - lastWheel > 160;
+    if (event.ctrlKey || !event.deltaY || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+    const direction = Math.sign(event.deltaY);
+    const newGesture = direction !== wheelDirection || event.timeStamp - lastWheel > 160;
     lastWheel = event.timeStamp;
-    if (newGesture || event.deltaY <= 0) wheelTravel = 0;
-    if (event.deltaY <= 0 || !event.cancelable) return;
+    wheelDirection = direction;
+    if (newGesture) wheelTravel = 0;
+    if (!event.cancelable) return;
 
     const pixelsPerUnit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1;
-    wheelTravel += event.deltaY * pixelsPerUnit;
+    wheelTravel += Math.abs(event.deltaY) * pixelsPerUnit;
     const advance = newGesture || (event.timeStamp - lastWheelAdvance >= 360 && wheelTravel >= 240);
-    if (!canAdvance()) {
-      if (ready && nextClip === clipCount && !advance && heroSequence.getBoundingClientRect().bottom > innerHeight - 2) {
+    if (!canPlay(direction)) {
+      if (direction > 0 && inHero() && activeClip === clipCount - 1 && !advance &&
+          heroSequence.getBoundingClientRect().bottom > innerHeight - 2) {
         event.preventDefault();
       }
       return;
@@ -107,43 +116,49 @@ if (sequenceSource) {
     if (advance) {
       lastWheelAdvance = event.timeStamp;
       wheelTravel = 0;
-      playNextClip();
+      playClip(direction);
     }
   }, { passive: false });
 
   window.addEventListener('touchstart', (event) => {
-    touchStart = event.touches.length === 1 && canAdvance() ? event.touches[0] : undefined;
-    touchConsumed = false;
+    touchStart = event.touches.length === 1 && inHero() ? event.touches[0] : undefined;
+    touchDirection = 0;
   }, { passive: true });
 
   window.addEventListener('touchmove', (event) => {
-    if (!touchStart || event.touches.length !== 1) return;
+    if (!touchStart || event.touches.length !== 1 || !event.cancelable) return;
     const touch = event.touches[0];
     const delta = touchStart.clientY - touch.clientY;
-    if (touchConsumed || (delta > 16 && delta > Math.abs(touch.clientX - touchStart.clientX))) {
-      if (!event.cancelable) return;
+    if (touchDirection) {
       event.preventDefault();
-      touchConsumed = true;
+    } else if (Math.abs(delta) > Math.max(16, Math.abs(touch.clientX - touchStart.clientX)) &&
+               canPlay(Math.sign(delta))) {
+      event.preventDefault();
+      touchDirection = Math.sign(delta);
     }
   }, { passive: false });
 
   window.addEventListener('touchend', () => {
-    if (touchConsumed && canAdvance()) playNextClip();
+    if (canPlay(touchDirection)) playClip(touchDirection);
     touchStart = undefined;
-    touchConsumed = false;
+    touchDirection = 0;
   }, { passive: true });
 
   window.addEventListener('touchcancel', () => {
     touchStart = undefined;
-    touchConsumed = false;
+    touchDirection = 0;
   }, { passive: true });
 
   window.addEventListener('keydown', (event) => {
-    if (!['ArrowDown', 'PageDown', ' '].includes(event.key) || event.shiftKey || event.ctrlKey ||
-        event.metaKey || event.altKey || event.target.closest?.('a, button, input, textarea, select, [contenteditable]')) return;
-    if (!canAdvance()) return;
+    if (event.ctrlKey || event.metaKey || event.altKey ||
+        event.target.closest?.('a, button, input, textarea, select, [contenteditable]')) return;
+    let direction = 0;
+    if (event.key === ' ') direction = event.shiftKey ? -1 : 1;
+    else if (!event.shiftKey && ['ArrowDown', 'PageDown'].includes(event.key)) direction = 1;
+    else if (!event.shiftKey && ['ArrowUp', 'PageUp'].includes(event.key)) direction = -1;
+    if (!canPlay(direction)) return;
     event.preventDefault();
-    if (!event.repeat) playNextClip();
+    if (!event.repeat) playClip(direction);
   });
 
   sequenceVideo.addEventListener('loadeddata', () => {
