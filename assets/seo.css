@@ -5,3 +5,8 @@
 .landing-breadcrumbs { font-size: .9rem; }
 .landing-breadcrumbs a { text-decoration: underline; text-underline-offset: .2em; }
 .landing-benefits { display: flex; flex-wrap: wrap; gap: .5rem 2rem; padding-inline-start: 1.2rem; }
+
+.landing-catalogs { background: #e7f0e4; }
+.landing-catalogs .rel { gap: .7rem; }
+.landing-catalogs .rel a.landing-catalog-link { background: #153d32; color: #fff; }
+.landing-catalogs .rel a.landing-catalog-link:is(:hover,:focus-visible) { background: #29604e; }

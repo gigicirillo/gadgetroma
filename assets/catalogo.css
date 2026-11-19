@@ -92,3 +92,5 @@
   .catalog-index nav a > span { flex-shrink: 0; }
   .catalog-grid, .catalog-general .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+.catalog-general[id] { scroll-margin-top: 8rem; }

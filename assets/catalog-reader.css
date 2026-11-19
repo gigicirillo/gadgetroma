@@ -1,0 +1,26 @@
+.reader { max-width: 900px; padding-block: 2.25rem 4rem; }
+.reader h1 { font-size: clamp(2.3rem, 6vw, 4.5rem); margin-block: .65rem 1.2rem; }
+.reader p { margin-block: .7rem; }
+.reader-controls:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: .6rem;
+  padding: .75rem;
+  background: #dce9d5;
+  border-radius: .75rem;
+}
+.reader-controls button, .reader-controls select {
+  border: 1px solid #94ad99;
+  border-radius: .45rem;
+  color: #153b32;
+  background: #fff;
+  padding: .5rem .65rem;
+  font: inherit;
+}
+.reader-controls button:not(:disabled) { cursor: pointer; }
+.reader-controls button:disabled { opacity: .5; }
+.reader-status { text-align: center; font-size: .875rem; }
+.reader-page { display: block; width: fit-content; max-width: 100%; margin-inline: auto; }
+.reader-page img { display: block; max-width: 100%; height: auto; background: #eff3e9; }
