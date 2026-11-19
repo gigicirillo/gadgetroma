@@ -1,0 +1,155 @@
+.m-content, .m-overview {
+  --m-ink: #11342c;
+  --m-paper: #f4f2e7;
+  --m-line: #afbdab;
+  --m-gutter: clamp(1rem, 5vw, 6rem);
+  background: var(--m-paper);
+  color: var(--m-ink);
+}
+.m-wrap { width: min(1420px, calc(100% - 2 * var(--m-gutter, 1rem))); margin-inline: auto; }
+.m-group { padding-block: clamp(3rem, 8vw, 8rem); scroll-margin-top: 8rem; }
+.m-heading { margin-bottom: clamp(1.4rem, 3vw, 3rem); }
+.m-heading p { margin: 0 0 .55rem; font-size: .75rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.m-heading h2 { max-width: 18ch; margin: 0; font-size: clamp(2.3rem, 5.9vw, 6.25rem); line-height: .98; letter-spacing: -.07em; }
+.m-grid, .m-product-grid, .m-steps, .m-reviews { display: grid; gap: 1rem; }
+.m-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.m-card, .m-product { display: block; position: relative; overflow: hidden; text-decoration: none; color: inherit; }
+.m-card { background: #fffdf4; }
+.m-card img, .m-product img, .m-steps img { display: block; width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; }
+.m-card div { padding: clamp(1rem,3vw,2.35rem); }
+.m-card h3, .m-steps h3 { font-size: clamp(1.3rem,2.6vw,2.55rem); line-height: 1.03; margin: 0 0 .5rem; }
+.m-card p, .m-steps p { margin: 0; max-width: 38ch; }
+.m-card div > span { display: block; margin-top: 1rem; }
+.m-card img, .m-product img { transition: transform .45s; }
+@media (hover:hover) {
+  .m-card:hover img, .m-product:hover img { transform: scale(1.045); }
+}
+.m-product-grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
+.m-product { background: #fffef8; }
+.m-product span { display: flex; justify-content: space-between; padding: .75rem 1rem; font-weight: 750; }
+.m-link { display: inline-block; margin-top: 1.5rem; color: inherit; font-weight: 800; text-underline-offset: .3em; }
+.m-steps { list-style: none; padding: 0; margin: 0; grid-template-columns: repeat(4,minmax(0,1fr)); }
+.m-steps li { background: #fffdf4; overflow: hidden; }
+.m-steps li div { padding: 1.15rem; }
+.m-steps li span { display: block; font-size: .8rem; font-weight: 800; margin-bottom: .55rem; }
+.m-reviews { grid-template-columns: 1.28fr 1fr; }
+.m-reviews figure { margin: 0; padding: clamp(1.3rem,3.5vw,3.4rem); background: #e1ebd4; }
+.m-reviews blockquote { margin: 0 0 1rem; font: 1.4rem/1.35 Georgia, serif; }
+.m-reviews figcaption { font-size: .82rem; font-weight: 750; }
+.m-questions details { border-block-start: 1px solid var(--m-line); padding: .9rem 0; }
+.m-questions summary { cursor: pointer; font-weight: 750; }
+.m-questions p { margin: .6rem 0 0; }
+.m-progetto { background: linear-gradient(90deg,#123a2e 16%,#123a2ee8 48%,#123a2e45),url("../assets/preventivo-editoriale.webp") center / cover; color: #f8ffee; }
+.m-progetto p { max-width: 48ch; }
+.m-progetto .button { margin-top: 1rem; }
+.m-footer { display: flex; flex-wrap: wrap; gap: 1rem 2rem; padding-block: 2rem; }
+
+/* Editoriale */
+.m-editoriale .m-heading h2 { font-family: Georgia, serif; font-weight: 400; }
+.m-editoriale .m-soluzioni .m-grid { grid-template-columns: 1.65fr 1fr; }
+.m-editoriale .m-solution:first-child { grid-row: span 2; display: flex; flex-direction: column; }
+.m-editoriale .m-solution:first-child img { flex: 1; min-height: 0; }
+.m-editoriale .m-solution:not(:first-child) { display: grid; grid-template-columns: 42% 1fr; align-items: center; }
+.m-editoriale .m-solution:not(:first-child) img { height: 100%; }
+.m-editoriale .m-prodotti { background: #dde6d6; }
+.m-editoriale .m-product:nth-child(-n+2) { grid-column: span 2; }
+.m-editoriale .m-product:nth-child(-n+2) img { aspect-ratio: 16/9; }
+.m-editoriale .m-service { border-top: 2px solid #153d31; }
+.m-editoriale .m-faq .m-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1rem; }
+
+/* Bento */
+.m-bento { --m-paper: #e0ead7; }
+.m-bento .m-card, .m-bento .m-product, .m-bento .m-steps li, .m-bento .m-reviews figure { border-radius: clamp(.85rem,2vw,2rem); }
+.m-bento .m-servizio .m-grid { grid-template-columns: 1.45fr 1fr 1fr; align-items: stretch; }
+.m-bento .m-service:first-child { background: #193f32; color: #fff; }
+.m-bento .m-service img { aspect-ratio: 1.65; }
+.m-bento .m-service:first-child img { object-position: center 38%; }
+.m-bento .m-prodotti { background: #c4dabf; }
+.m-bento .m-product-grid { grid-auto-flow: dense; }
+.m-bento .m-product:first-child, .m-bento .m-product:nth-child(7) { grid-column: span 2; }
+.m-bento .m-product:first-child img, .m-bento .m-product:nth-child(7) img { aspect-ratio: 2.68; }
+.m-bento .m-product:nth-child(2), .m-bento .m-product:nth-child(5) { background: #e7f6b6; }
+.m-bento .m-steps { gap: .75rem; }
+.m-bento .m-steps li:nth-child(even) { background: #cbdbb0; }
+.m-bento .m-questions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .75rem; }
+.m-bento .m-questions details { background: #fffdf4; border: 0; padding: 1.2rem; border-radius: 1.25rem; }
+
+/* Studio */
+.m-studio { --m-paper: #122a23; --m-ink: #f7f8ed; --m-line: #749184; }
+.m-studio .m-soluzioni .m-wrap { width: min(1540px, 100%); }
+.m-studio .m-soluzioni .m-heading { margin-inline: var(--m-gutter); }
+.m-studio .m-soluzioni .m-grid { grid-template-columns: 1.25fr 1fr 1fr; gap: 3px; }
+.m-studio .m-solution { min-height: clamp(19rem,40vw,38rem); display: grid; align-items: end; background: #16372b; color: #fff; }
+.m-studio .m-solution img { position: absolute; inset: 0; height: 100%; }
+.m-studio .m-solution::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg,#0e251ff8 0%,#0e251f88 45%,transparent 80%); }
+.m-studio .m-solution div { position: relative; z-index: 1; }
+.m-studio .m-processo, .m-studio .m-faq { background: #f3f0e4; color: #14352b; --m-line: #99b0a4; }
+.m-studio .m-service, .m-studio .m-product { background: #224c3b; color: #fff; }
+.m-studio .m-servizio .m-card img { aspect-ratio: 1; border-radius: 50% 50% 0 0; }
+.m-studio .m-reviews figure { background: #224c3b; color: #fff; }
+
+/* Lookbook */
+.m-lookbook { --m-paper: #f9f5ee; }
+.m-lookbook .m-prodotti .m-wrap { width: 100%; }
+.m-lookbook .m-prodotti :is(.m-heading,.m-link) { margin-inline: var(--m-gutter); }
+.m-lookbook .m-product-grid { grid-auto-flow: column; grid-auto-columns: clamp(15rem,34vw,35rem); grid-template-columns: none; overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory; padding: 0 var(--m-gutter) 1rem; scroll-padding-inline: var(--m-gutter); }
+.m-lookbook .m-product { scroll-snap-align: start; }
+.m-lookbook .m-product img { aspect-ratio: 1; }
+.m-lookbook .m-soluzioni { background: #dce7da; }
+.m-lookbook .m-soluzioni .m-grid { grid-template-columns: 1fr; }
+.m-lookbook .m-solution { display: grid; grid-template-columns: 58% 42%; align-items: center; }
+.m-lookbook .m-solution:nth-child(even) { grid-template-columns: 42% 58%; }
+.m-lookbook .m-solution:nth-child(even) img { order: 2; }
+.m-lookbook .m-solution img { aspect-ratio: 2.3; }
+.m-lookbook .m-recensioni .m-wrap { max-width: 940px; }
+.m-lookbook .m-reviews figure { background: transparent; border-top: 1px solid var(--m-line); padding-inline: 0; }
+
+/* Percorso */
+.m-percorso { --m-paper: #edf0e4; }
+.m-percorso .m-processo .m-wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(1rem,5vw,5rem); }
+.m-percorso .m-processo .m-heading { align-self: start; position: sticky; top: 7rem; }
+.m-percorso .m-steps { grid-template-columns: 1fr; border-inline-start: 2px solid #819c83; padding-inline-start: 1.2rem; gap: 1.5rem; }
+.m-percorso .m-steps li { border-radius: 0 2rem 2rem 0; display: grid; grid-template-columns: 40% 1fr; align-items: center; }
+.m-percorso .m-steps img { height: 100%; }
+.m-percorso .m-steps li span { color: #437150; font: 2.15rem/1 Georgia, serif; }
+.m-percorso .m-servizio { background: #d7e3d0; }
+.m-percorso .m-card { border-radius: 0 2rem 0 2rem; }
+.m-percorso .m-soluzioni .m-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.m-percorso .m-solution img { aspect-ratio: 2; }
+
+.m-overview { min-height: 100vh; margin: 0; font-family: system-ui,sans-serif; }
+.m-overview main { padding-block: 2rem 4rem; }
+.m-overview .m-brand { object-fit: contain; }
+.m-overview h1 { max-width: 18ch; margin: 1rem 0 .4rem; font-size: clamp(2.3rem,6vw,5rem); letter-spacing: -.06em; line-height: 1; }
+.m-overview ul { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 1rem; list-style: none; padding: 0; }
+.m-overview li a { display: block; border: 1px solid #b7c3b3; border-radius: 1rem; overflow: hidden; text-decoration: none; color: inherit; background: #fffdf4; }
+.m-overview li img { display: block; width: 100%; height: auto; aspect-ratio: 1/2; object-fit: cover; object-position: top; background: #153c30; }
+.m-overview li span { display: grid; gap: .2rem; padding: 1rem; font-size: .85rem; }
+.m-overview li strong { font-size: 1.2rem; }
+@media (max-width: 1050px) {
+  .m-overview ul { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+@media (max-width: 700px) {
+  .m-grid, .m-reviews, .m-editoriale .m-soluzioni .m-grid, .m-editoriale .m-faq .m-wrap,
+  .m-bento .m-servizio .m-grid, .m-bento .m-questions, .m-studio .m-soluzioni .m-grid,
+  .m-percorso .m-processo .m-wrap, .m-percorso .m-soluzioni .m-grid { grid-template-columns: 1fr; }
+  .m-product-grid, .m-steps, .m-overview ul { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .m-editoriale .m-solution:first-child { grid-row: auto; }
+  .m-studio .m-solution { min-height: 20rem; }
+  .m-percorso .m-processo .m-heading { position: static; }
+  .m-lookbook .m-solution:nth-child(n) { grid-template-columns: 1fr; }
+  .m-lookbook .m-solution:nth-child(n) img { order: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .m-card img, .m-product img { transition: none; }
+}
+
+.m-values { display: flex; flex-wrap: wrap; gap: .65rem; list-style: none; padding: 0; margin: 0; }
+.m-values li { display: flex; align-items: center; gap: .6rem; padding: .8rem 1rem; background: #deead7; color: #13392c; }
+.m-values li span { font-size: 1.3rem; }
+.m-editoriale .m-values li { flex: 1 1 12rem; background: transparent; border-top: 1px solid var(--m-line); }
+.m-bento .m-values li { border-radius: 1.25rem; flex: 1 1 10rem; background: #f7faef; }
+.m-studio .m-values li { background: transparent; border: 1px solid #749184; color: #f7f8ed; }
+.m-lookbook .m-values li { border-radius: 99px; }
+.m-percorso .m-values li { border-top-left-radius: 1.5rem; border-bottom-right-radius: 1.5rem; }
+.m-overview li .m-download { display: inline-block; margin: .55rem 0; padding: .3rem .65rem; background: transparent; font-size: .8rem; }
